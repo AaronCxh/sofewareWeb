@@ -1,0 +1,32 @@
+@import './var/var.scss';
+@import './mixins/mixins.scss';
+@import './common/common.scss';
+
+
+.container {
+  margin: 0 auto;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0;
+}
+
+@font-face {
+  font-family: 'Dosis';
+  src: url('@/assets/fonts/Dosis-Regular-2.ttf');
+}
+body {
+  font-family: 'Dosis'
+}
+@media (min-width: 1260px) {
+  .container {
+    max-width: 1170px;
+  }
+}
+@media (min-width: 1500px) {
+  .container {
+    max-width: 1410px;
+  }
+}
