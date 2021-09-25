@@ -2,5 +2,9 @@
 import "nprogress/nprogress.css"; // progress bar style
 
 export default ({ app }) => {
-  console.log(app);
+  app.router.beforeEach(async (to, from, next) => {
+    NProgress.start();
+    next();
+    NProgress.done();
+  });
 };

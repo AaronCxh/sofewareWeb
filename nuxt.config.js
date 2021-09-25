@@ -8,6 +8,9 @@ export default {
     htmlAttrs: {
       lang: "zh"
     },
+    bodyAttrs: {
+      class: 'dark'
+    },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -21,7 +24,7 @@ export default {
   css: ["ant-design-vue/dist/antd.css", "@/scss/main.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["@/plugins/antd-ui", "@/plugins/router"],
+  plugins: ["@/plugins/antd-ui", "@/plugins/permission"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -33,5 +36,9 @@ export default {
   modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+  // 配置自定义路由
+  router: {
+    mode: "hash"
+  }
 };

@@ -1,5 +1,5 @@
 ﻿<template>
-  <div>留言反馈</div>
+  <div>软件</div>
 </template>
 
 <script>

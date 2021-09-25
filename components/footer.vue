@@ -2,9 +2,9 @@
   <div class="footer">
     <div class="container">
       <div class="flex-box">
-        <a href="#" class="logo">
+        <nuxt-link to="/" class="logo">
           <img src="~assets/images/首页_03.png" alt="" />
-        </a>
+        </nuxt-link>
         <nav>
           <nuxt-link class="nav-link" to="/">首页</nuxt-link>
           <nuxt-link class="nav-link" to="/about">关于</nuxt-link>
@@ -12,7 +12,7 @@
           <nuxt-link class="nav-link" to="/privacy">隐私</nuxt-link>
         </nav>
         <div class="icq">
-          <a href="#">粤ICP备19036164号</a>
+          <a target="_blank" href="#">粤ICP备19036164号</a>
           <span>www.729.com © 2019. All rights reserved.</span>
         </div>
       </div>
@@ -39,6 +39,7 @@ export default {};
   .nav-link {
     display: inline-block;
     padding: 0 25px;
+    font-size: 15px;
     &:hover {
       color: $color-default;
     }
