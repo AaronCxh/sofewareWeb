@@ -63,7 +63,6 @@ export default {
   @media (max-width: 992px) {
     @include b(search-wrapper){
       width: 260px;
-        
     }
   }
 </style>

@@ -1,5 +1,8 @@
 ﻿<template>
-  <div>软件</div>
+  <div>
+    软件
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>

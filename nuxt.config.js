@@ -9,7 +9,7 @@ export default {
       lang: "zh"
     },
     bodyAttrs: {
-      class: 'dark'
+      class: "dark"
     },
     meta: [
       { charset: "utf-8" },
@@ -17,7 +17,12 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    script: [
+      {
+        src: "/js/lazysize.js", defer: true
+      }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -36,9 +41,15 @@ export default {
   modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    // extend(config, { isClient }) {
+    //   config.externals = {
+    //   }
+    // }
+  },
   // 配置自定义路由
   router: {
-    mode: "hash"
+    mode: "hash",
+    extendRoutes(routes, resolve) {}
   }
 };
