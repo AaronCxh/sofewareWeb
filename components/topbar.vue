@@ -2,8 +2,8 @@
   <div class="topbar">
     <div class="container">
       <nav>
-        <nuxt-link to="bibei">装机必备</nuxt-link>
-        <nuxt-link to="feedback">留言反馈</nuxt-link>
+        <nuxt-link to="/bibei">装机必备</nuxt-link>
+        <nuxt-link to="/feedback">留言反馈</nuxt-link>
       </nav>
     </div>
   </div>

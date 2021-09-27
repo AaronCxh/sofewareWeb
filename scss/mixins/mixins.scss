@@ -102,3 +102,8 @@
     containPseudoClass($selector);
 }
 
+
+
+@function vw($n) {
+  @return $n / 1920 * 100vw;
+}

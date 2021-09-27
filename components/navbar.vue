@@ -51,7 +51,8 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   background: #1c283b;
-  box-shadow: 0px 5px 7px 1px rgba(191, 191, 191, 0.08);
+  // box-shadow: 0px 5px 7px 1px rgba(191, 191, 191, 0.08);
+  border-bottom: 1px solid rgba($color: #78828c, $alpha: 0.09);
   .flex-box {
     height: 60px;
     width: 100%;

@@ -253,36 +253,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/scss/var/var";
 @import "@/scss/mixins/mixins";
-.promo-wrapper {
-  position: relative;
-  margin: 24px 0 33px;
-  .swiper-container {
-    border-radius: 6px;
-  }
-  .btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    background: rgba($color: #000000, $alpha: 0.8);
-    cursor: pointer;
-    .iconfont {
-      color: #a0b4c8;
-    }
-    &.button-prev {
-      left: 20px;
-    }
-    &.button-next {
-      right: 20px;
-    }
-  }
-}
+
 .category-wrapper {
   color: #fff;
   .item {
@@ -359,7 +330,9 @@ export default {
 </style>
 <style lang="scss">
 .promo-wrapper {
-  .swiper-pagination {
+  position: relative;
+  margin: 24px 0 33px;
+  @at-root .swiper-pagination {
     .swiper-pagination-bullet {
       width: 30px !important;
       height: 2px !important;
@@ -367,6 +340,32 @@ export default {
       &.swiper-pagination-bullet-active {
         background: #a0b4c8 !important;
       }
+    }
+  }
+  @at-root .swiper-container {
+    border-radius: 6px;
+  }
+  @at-root .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    background: rgba($color: #000000, $alpha: 0.8);
+    cursor: pointer;
+    .iconfont {
+      color: #a0b4c8;
+    }
+    &.button-prev {
+      left: 20px;
+    }
+    &.button-next {
+      right: 20px;
     }
   }
 }

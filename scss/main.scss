@@ -2,7 +2,6 @@
 @import "./mixins/mixins.scss";
 @import "./common/common.scss";
 
-
 @for $i from 0 through 12 {
   .delay-#{$i} {
     animation-delay: 0.05s * $i;
@@ -10,14 +9,12 @@
 }
 
 @font-face {
-  font-family: "iconfont"; /* Project id 2833493 */
-  src: url("//at.alicdn.com/t/font_2833493_wfgr0lxmleb.woff2?t=1632627460422")
-      format("woff2"),
-    url("//at.alicdn.com/t/font_2833493_wfgr0lxmleb.woff?t=1632627460422")
-      format("woff"),
-    url("//at.alicdn.com/t/font_2833493_wfgr0lxmleb.ttf?t=1632627460422")
-      format("truetype");
+  font-family: 'iconfont';  /* Project id 2833493 */
+  src: url('//at.alicdn.com/t/font_2833493_rqzt6yn325q.woff2?t=1632734854241') format('woff2'),
+       url('//at.alicdn.com/t/font_2833493_rqzt6yn325q.woff?t=1632734854241') format('woff'),
+       url('//at.alicdn.com/t/font_2833493_rqzt6yn325q.ttf?t=1632734854241') format('truetype');
 }
+
 .layout-min-height {
   min-height: calc(100vh - 178px);
 }
@@ -25,7 +22,17 @@
   --sofeItembackgroundColor: #1b273a;
   --sofeItemColor: #a0b4c8;
   --borderColor: #243043;
-  --tutorialBackgroundColor: #121A26;
+  --tutorialBackgroundColor: #121a26;
+  --color-default: #50a1ff;
+  --color-success: #0081cc;
+  --color-danger: #e93b3d;
+  --color-warn: #fa811b;
+  --color-fontColor: #a0b4c8;
+  --darkBackgroundColor: #16202f;
+}
+.text-muted {
+  color: var(--sofeItemColor) !important;
+  opacity: 0.7;
 }
 .border {
   border: 1px solid var(--borderColor);
@@ -34,9 +41,9 @@
   width: 100%;
   height: auto;
   backface-visibility: hidden;
-  transition: transform 1s , filter 0.5s 0.5s;
-  filter: blur(20px) opacity(70%);
-  transform: scale(1.25);
+  transition: transform 1s, filter 0.5s 0.5s;
+  filter: blur(10px) opacity(70%);
+  transform: scale(1.1);
   &.lazyloaded {
     filter: blur(0) opacity(100%);
     transform: scale(1);
@@ -77,17 +84,21 @@ a {
   text-decoration: none;
   cursor: pointer;
   outline: 0;
+  &:hover {
+    color: var(--color-default);
+  }
 }
 
+.dark {
+}
 @font-face {
   font-family: "Dosis";
   src: url("@/assets/fonts/Dosis-Regular-2.ttf");
 }
 
-.swiper-container {
-}
 body {
   font-family: "Dosis";
+  font-size: 15px;
 }
 .page-enter-active,
 .page-leave-active {
@@ -145,11 +156,89 @@ body {
     opacity: 1;
   }
 }
+@keyframes scale-upOne {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.2);
+  }
+}
+@keyframes animationFramesOne {
+  0% {
+    transform: translate(0) rotate(0deg);
+  }
+  20% {
+    transform: translate(73px, -1px) rotate(36deg);
+  }
+  40% {
+    transform: translate(141px, 72px) rotate(72deg);
+  }
+  60% {
+    transform: translate(83px, 122px) rotate(108deg);
+  }
+  80% {
+    transform: translate(-40px, 72px) rotate(144deg);
+  }
+  100% {
+    transform: translate(0) rotate(0deg);
+  }
+}
+@keyframes animationFramesTwo {
+  0% {
+    transform: translate(0) rotate(0deg) scale(1);
+  }
+  20% {
+    transform: translate(73px, -1px) rotate(36deg) scale(0.9);
+  }
+  40% {
+    transform: translate(141px, 72px) rotate(72deg) scale(1);
+  }
+  60% {
+    transform: translate(83px, 122px) rotate(108deg) scale(1.2);
+  }
+  80% {
+    transform: translate(-40px, 72px) rotate(144deg) scale(1.1);
+  }
+  100% {
+    transform: translate(0) rotate(0deg) scale(1);
+  }
+}
+@keyframes animationFramesFour {
+  0% {
+    transform: translate(-300px, 151px) rotate(0deg);
+  }
+  100% {
+    transform: translate(251px, -200px) rotate(180deg);
+  }
+}
+.container-sm {
+  max-width: 990px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
 @media (max-width: 768px) {
   .footer {
     nav {
       display: none;
     }
+  }
+  .navbar {
+    nav {
+      display: none !important;
+    }
+  }
+  .artilce-detail {
+    .artilce-content {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+  .topbar {
+    display: none !important;
+  }
+  .search-wrapper {
+    display: none !important;
   }
 }
 @media (min-width: 768px) and (max-width: 992px) {

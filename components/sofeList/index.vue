@@ -95,7 +95,7 @@ export default {
     @include m(con) {
       position: relative;
       padding: 25px 5px 35px;
-      height: 150px;
+      min-height: 150px;
       color: var(--sofeItemColor);
     }
     @include m(version) {

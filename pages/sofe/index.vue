@@ -1,12 +1,12 @@
 ﻿<template>
   <div>
     软件
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'sofe',
   layout: 'layout',
 }
 </script>

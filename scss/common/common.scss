@@ -16,17 +16,18 @@ button:after {
 .button {
   font-size: 16px;
   height: 40px;
-  line-height: 40px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid transparent;
   font-weight: 500;
   white-space: nowrap;
   background-color: #fff;
   box-sizing: border-box;
-  text-align: center;
   width: auto;
   border-radius: 0;
   cursor: pointer;
+  transition: all 0.3s;
   &:focus {
     outline: none;
   }
@@ -38,19 +39,19 @@ button:after {
 }
 
 .button-default {
-  background: $color-default !important;
-  color: #fff !important;
-  border-color: $color-default !important;
-  &:active {
-    background: darken($color: $color-default, $amount: 10) !important;
-    color: #fff !important;
-    border-color: darken($color: $color-default, $amount: 10) !important;
+  background: $color-default ;
+  color: #fff ;
+  border-color: $color-default ;
+  &:hover {
+    background: darken($color: $color-default, $amount: 10) ;
+    color: #fff ;
+    border-color: darken($color: $color-default, $amount: 10) ;
   }
 }
-.button-normal-reverse {
-  background: #fff !important;
-  color: $color-default !important;
-  border-color: $color-default !important;
+.button-default-reverse {
+  background: transparent ;
+  color: $color-default ;
+  border-color: $color-default ;
 }
 .button-warn {
   background: #fa811b;
@@ -77,4 +78,17 @@ button:after {
 }
 .flex-box {
   display: flex;
+}
+.align-center {
+  align-items: center;
+}
+
+.text-danger {
+  color: $color-danger;
+}
+.text-center {
+  text-align: center;
+}
+.fw600 {
+  font-weight: 600 !important;
 }
