@@ -5,6 +5,9 @@ button:after {
   border-color: transparent;
 }
 
+.nowrap {
+  @include nowrap()
+}
 .fixed-bottom {
   position: fixed;
   width: 100%;
@@ -100,3 +103,14 @@ button:after {
   font-weight: 400 !important;
 }
 
+.f12 {
+  font-size: 12px;
+}
+
+.mr12 {
+  margin-right: 12px;
+}
+
+.mb32 {
+  margin-bottom: 32px;
+}

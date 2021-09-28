@@ -74,7 +74,7 @@
     </div>
     <div class="sofeDetail-body">
       <div class="container">
-        <div class="sofeDetail-inner">
+        <div class="sofe-inner">
           <div class="sofeDetail-info">
             <div class="sofeDetail-info__cell">
               <div class="box">
@@ -395,7 +395,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/scss/var/var";
 @import "@/scss/mixins/mixins";
 :root {
@@ -530,13 +530,7 @@ export default {
     }
   }
 }
-.sofeDetail-inner {
-  // background: var(--sofeDetailBgColor);
-  margin-bottom: 80px;
-  background: #1c283b;
-  box-shadow: 0 30px 48px rgba(9, 13, 19, 0.5);
-  border: 1px solid var(--borderColor);
-}
+
 .sofeDetail-info {
   display: flex;
   border-bottom: 1px solid var(--borderColor);
@@ -701,52 +695,5 @@ export default {
 .sofe-wrapper__item {
   background: rgba($color: #172131, $alpha: 0.9);
 }
-@media (min-width: 768px) and (max-width: 992px) {
-  .sofeDetail-inner {
-    .container {
-      max-width: 660px;
-    }
-  }
-  .w-col {
-    width: (100% / 2);
-  }
-}
 
-@media (min-width: 860px) and (max-width: 1260px) {
-  .sofeDetail-inner {
-    .container {
-      max-width: 860px;
-    }
-  }
-  .w-col {
-    width: (100% / 3);
-    &:nth-child(10n + 10) {
-      display: none;
-    }
-  }
-}
-@media (min-width: 1260px) and (max-width: 1500px) {
-  .sofeDetail-inner {
-    .container {
-      max-width: 1080px;
-    }
-  }
-  .w-col {
-    width: (100% / 4);
-    &:nth-child(10n + 9),
-    &:nth-child(10n + 10) {
-      display: none !important;
-    }
-  }
-}
-@media (min-width: 1500px) {
-  .sofeDetail-inner {
-    .container {
-      max-width: 1240px;
-    }
-  }
-  .w-col {
-    width: (100% / 5);
-  }
-}
 </style>

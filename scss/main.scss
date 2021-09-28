@@ -10,11 +10,11 @@
 
 @font-face {
   font-family: "iconfont"; /* Project id 2833493 */
-  src: url("//at.alicdn.com/t/font_2833493_rqzt6yn325q.woff2?t=1632734854241")
+  src: url("//at.alicdn.com/t/font_2833493_e5ftepeuks.woff2?t=1632840188177")
       format("woff2"),
-    url("//at.alicdn.com/t/font_2833493_rqzt6yn325q.woff?t=1632734854241")
+    url("//at.alicdn.com/t/font_2833493_e5ftepeuks.woff?t=1632840188177")
       format("woff"),
-    url("//at.alicdn.com/t/font_2833493_rqzt6yn325q.ttf?t=1632734854241")
+    url("//at.alicdn.com/t/font_2833493_e5ftepeuks.ttf?t=1632840188177")
       format("truetype");
 }
 
@@ -71,6 +71,7 @@
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-fontColor);
 }
 button {
   background: transparent;
@@ -165,6 +166,14 @@ body {
   }
   100% {
     transform: scale(0.2);
+  }
+}
+@keyframes service_hexagon {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1turn);
   }
 }
 @keyframes animationFramesOne {
@@ -325,7 +334,6 @@ body {
     padding: 30px 30px 10px;
     text-align: left;
     line-height: 30px;
-
   }
   &.dark {
     .ant-modal-content {
@@ -366,13 +374,27 @@ body {
       }
       span {
         i {
-          color: #3CD458;
+          color: #3cd458;
           font-style: initial;
         }
       }
     }
     .summary {
       font-size: 14px;
+    }
+  }
+}
+.h150 {
+  height: 150px;
+}
+.section-title {
+  h4 {
+    color: var(--color-fontColor);
+    font-size: 1.52344rem;
+    span {
+      font-size: 18px;
+      margin-left: 8px;
+      font-weight: 400;
     }
   }
 }
@@ -415,19 +437,231 @@ body {
       display: none;
     }
   }
+  .sofe-inner {
+    .container {
+      max-width: 660px;
+    }
+  }
+  .w-col {
+    width: (100% / 2);
+  }
 }
 @media (min-width: 992px) and (max-width: 1260px) {
   .container {
     max-width: 992px;
   }
+  .bibei-wrapper {
+    .ant-col {
+      width: (100% / 4) !important;
+    }
+  }
+  .sofe-inner {
+    .container {
+      max-width: 860px;
+    }
+  }
+  .w-col {
+    width: (100% / 3);
+    &:nth-child(10n + 10) {
+      display: none;
+    }
+  }
 }
-@media (min-width: 1260px) {
+@media (min-width: 1260px) and (max-width: 1500px) {
   .container {
     max-width: 1200px;
+  }
+  .bibei-wrapper {
+    .ant-col {
+      width: (100% / 5) !important;
+    }
+  }
+  .sofe-inner {
+    .container {
+      max-width: 1080px;
+    }
+  }
+  .w-col {
+    width: (100% / 4);
+    &:nth-child(10n + 9),
+    &:nth-child(10n + 10) {
+      display: none !important;
+    }
   }
 }
 @media (min-width: 1500px) {
   .container {
     max-width: 1440px;
   }
+  .sofe-inner {
+    .container {
+      max-width: 1240px;
+    }
+  }
+  .w-col {
+    width: (100% / 5);
+  }
 }
+
+.sofe-inner {
+  // background: var(--sofeDetailBgColor);
+  margin-bottom: 80px;
+  background: #1c283b;
+  box-shadow: 0 30px 48px rgba(9, 13, 19, 0.5);
+  border: 1px solid var(--borderColor);
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 10px 25px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #999;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid var(--borderColor);
+  border-radius: 2px;
+  background-color: #23334b;
+  color: rgba(160, 180, 200, 0.9);
+  font-weight: 300;
+  outline: none;
+  &::placeholder {
+    color: rgba($color: #fff, $alpha: 0.7);
+  }
+}
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  border: 1px solid var(--borderColor);
+  transition: all 0.3s ease-out;
+  .input-group-prepend {
+    margin-left: 0;
+    margin-right: 0;
+    .input-group-text {
+      background-color: #23334b;
+      color: rgba(160, 180, 200, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: 20px;
+      border: none;
+      font-weight: 300;
+      border-radius: 0;
+      height: 100%;
+    }
+  }
+  .form-control {
+    flex: 1;
+    border: none;
+    border-radius: 0;
+  }
+}
+.comments {
+  .comments-form {
+    position: relative;
+    margin-bottom: 48px;
+    textarea {
+      border-radius: 0 0 5px 5px;
+      padding: 20px 25px 60px;
+      background-color: #23334b;
+      color: rgba(160, 180, 200, 0.9);
+      height: auto;
+      resize: none;
+    }
+    .input-group {
+      border-bottom: 0;
+      overflow: hidden;
+    }
+    .ant-col {
+      &:first-child {
+        .input-group {
+          border-right: 0;
+          border-radius: 5px 0 0 0;
+        }
+      }
+      &:last-child {
+        .input-group {
+          border-radius: 0 5px 0 0;
+        }
+      }
+    }
+  }
+  textarea {
+    border-radius: 0 0 5px 5px;
+  }
+  .comments-action-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: right;
+    .button {
+      height: auto;
+      border-radius: 5px 0 5px 0;
+      padding: 10px 25px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+  }
+  .comments-list {
+    list-style: none;
+    padding: 0;
+    .item {
+      display: flex;
+      line-height: 1.9;
+      .avatar {
+        margin-right: 12px;
+        display: block;
+        img {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+        }
+      }
+      .name {
+        margin-right: 24px;
+        color: var(--color-default);
+        font-size: 16px;
+      }
+      .time {
+        font-size: 13px;
+      }
+      .content {
+        padding: 16px 0 24px;
+        border-bottom: 1px dashed var(--borderColor);
+        .comment-child {
+          margin-top: 24px;
+          .avatar {
+            img {
+              width: 32px;
+              height: 32px;
+            }
+          }
+          .content {
+            font-size: 14px;
+            padding: 12px 0;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.layout-main {
+  padding: 32px 0;
+  .inner {
+    box-shadow: 0 30px 48px rgba(9, 13, 19, 0.5);
+    border: 1px solid var(--borderColor);
+  }
+  .sofe-inner {
+    background-color: #16202f;
+  }
+}
+
