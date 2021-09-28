@@ -2,9 +2,17 @@
   <div class="sofe-wrapper__list">
     <a-row :gutter="20">
       <!-- <transition type="animation" appear mode="out-out"  name="leftIn" v-for="(item, index) in data" :key="item.id"> -->
-        <a-col :class="`animation fadeInLeft delay-${index}`" v-for="(item, index) in data" :xs="12" :sm="8" :lg="6" :xxl="4" :key="item.AutoID">
-          <sofe-item :data="item" :index="index"></sofe-item>
-        </a-col>
+      <a-col
+        :class="`animation fadeInLeft delay-${index}`"
+        v-for="(item, index) in data"
+        :xs="12"
+        :sm="8"
+        :lg="6"
+        :xxl="4"
+        :key="item.AutoID"
+      >
+        <sofe-item :data="item" :index="index"></sofe-item>
+      </a-col>
       <!-- </transition> -->
     </a-row>
   </div>
@@ -125,16 +133,25 @@ export default {
         font-size: 16px;
       }
     }
+    @include m(extend) {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      color: $color-fontColor;
+      opacity: 0.7;
+      .iconfont {
+        font-size: 14px;
+        opacity: 0.3;
+        margin-right: 5px;
+      }
+    }
   }
 }
 </style>
 
 <style lang="scss">
-
 .leftIn-enter {
   transform: translateX(-50px);
   opacity: 0;
 }
-
-
 </style>

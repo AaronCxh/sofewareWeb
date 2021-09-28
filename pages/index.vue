@@ -345,7 +345,7 @@ export default {
   @at-root .swiper-container {
     border-radius: 6px;
   }
-  @at-root .btn {
+  .btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

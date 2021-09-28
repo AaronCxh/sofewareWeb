@@ -52,6 +52,10 @@ button:after {
   background: transparent ;
   color: $color-default ;
   border-color: $color-default ;
+  &:hover {
+    background: $color-default;
+    color: #fff;
+  }
 }
 .button-warn {
   background: #fa811b;
@@ -92,3 +96,7 @@ button:after {
 .fw600 {
   font-weight: 600 !important;
 }
+.fw400 {
+  font-weight: 400 !important;
+}
+

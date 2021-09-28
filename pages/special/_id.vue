@@ -205,18 +205,6 @@ export default {
         @include m(con) {
           padding: 32px 5px 48px;
         }
-        @include m(extend) {
-          display: flex;
-          justify-content: space-between;
-          font-size: 15px;
-          color: $color-fontColor;
-          opacity: 0.7;
-          .iconfont {
-            font-size: 14px;
-            opacity: 0.3;
-            margin-right: 5px;
-          }
-        }
         &:hover {
           .snow-dot {
             display: inline-block;

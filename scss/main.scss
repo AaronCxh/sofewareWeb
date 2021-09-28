@@ -9,10 +9,13 @@
 }
 
 @font-face {
-  font-family: 'iconfont';  /* Project id 2833493 */
-  src: url('//at.alicdn.com/t/font_2833493_rqzt6yn325q.woff2?t=1632734854241') format('woff2'),
-       url('//at.alicdn.com/t/font_2833493_rqzt6yn325q.woff?t=1632734854241') format('woff'),
-       url('//at.alicdn.com/t/font_2833493_rqzt6yn325q.ttf?t=1632734854241') format('truetype');
+  font-family: "iconfont"; /* Project id 2833493 */
+  src: url("//at.alicdn.com/t/font_2833493_rqzt6yn325q.woff2?t=1632734854241")
+      format("woff2"),
+    url("//at.alicdn.com/t/font_2833493_rqzt6yn325q.woff?t=1632734854241")
+      format("woff"),
+    url("//at.alicdn.com/t/font_2833493_rqzt6yn325q.ttf?t=1632734854241")
+      format("truetype");
 }
 
 .layout-min-height {
@@ -29,6 +32,7 @@
   --color-warn: #fa811b;
   --color-fontColor: #a0b4c8;
   --darkBackgroundColor: #16202f;
+  --borderColor: rgba(120, 130, 140, 0.09);
 }
 .text-muted {
   color: var(--sofeItemColor) !important;
@@ -55,6 +59,7 @@
 }
 .dark {
   background-color: #16202f;
+  color: rgba(160, 180, 200, 0.9);
 }
 .nuxt-link-active {
   color: $color-default !important;
@@ -89,8 +94,6 @@ a {
   }
 }
 
-.dark {
-}
 @font-face {
   font-family: "Dosis";
   src: url("@/assets/fonts/Dosis-Regular-2.ttf");
@@ -204,6 +207,7 @@ body {
     transform: translate(0) rotate(0deg) scale(1);
   }
 }
+
 @keyframes animationFramesFour {
   0% {
     transform: translate(-300px, 151px) rotate(0deg);
@@ -216,6 +220,161 @@ body {
   max-width: 990px;
   padding: 0 15px;
   margin: 0 auto;
+}
+
+.tutorial-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  > div {
+    width: calc(50% - 10px);
+    &:first-child {
+      .post-item {
+        height: calc(100% - 20px);
+      }
+    }
+    &:last-child {
+      .post-item {
+        padding: 32px 20px;
+        .title {
+          font-size: 24px;
+          margin-bottom: 0;
+        }
+        .post-meta {
+          padding-top: 0;
+          line-height: 1.9;
+        }
+        @at-root .category--tools {
+          background: #9ba3bb !important;
+        }
+      }
+    }
+  }
+  .post-item {
+    border-radius: 20px;
+    display: flex;
+    padding: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    color: #fff;
+    width: 100%;
+    align-items: flex-end;
+    padding-bottom: 28px;
+    position: relative;
+    &:hover {
+      transform: scale(1.015);
+      box-shadow: 0 20px 30px rgba(116, 116, 166, 0.15);
+    }
+    .title {
+      font-size: 46px;
+      color: #fff;
+      margin-bottom: 30px;
+      max-height: 210px;
+      line-height: 1.3;
+      width: 100%;
+      height: auto;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      font-family: CircularStd-Medium, helvetica, sans-serif;
+      @include clamp(2);
+    }
+    .post-meta {
+      padding-top: 16px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+    }
+    .category {
+      margin-right: 15px;
+    }
+    @at-root .category {
+      font-family: CircularStd-Bold, helvetica, sans-serif;
+      padding: 8px 12px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: #f7236f;
+      border-radius: 12px;
+      display: inline-block;
+      color: #fff;
+    }
+  }
+}
+
+.my-amodal {
+  .ant-modal {
+    .ant-modal-title {
+      color: $color-fontColor;
+      font-size: 20px;
+    }
+  }
+  .ant-modal-body {
+    padding: 16px;
+  }
+  .ant-modal-content {
+    border-radius: 25px;
+    overflow: hidden;
+  }
+  .ant-modal-header {
+    border-bottom: none;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 30px 30px 10px;
+    text-align: left;
+    line-height: 30px;
+
+  }
+  &.dark {
+    .ant-modal-content {
+      box-shadow: 0 0 45px rgba(0, 0, 0, 0.8);
+      background-color: rgba(22, 32, 47, 0.9);
+    }
+    .ant-modal-header {
+      background-color: rgba(22, 32, 47, 0.9);
+    }
+  }
+}
+.download-list {
+  padding: 24px 24px 16px;
+  .download-list__item {
+    display: flex;
+    color: $color-fontColor;
+    margin-bottom: 24px;
+    .icon {
+      width: 30px;
+      height: 30px;
+      margin-right: 16px;
+    }
+    .title {
+      display: block;
+      line-height: 30px;
+      &:hover {
+        b {
+          color: $color-default;
+        }
+        span {
+          color: $color-fontColor;
+        }
+      }
+      b {
+        font-size: 17px;
+        font-weight: 500;
+        margin-right: 12px;
+      }
+      span {
+        i {
+          color: #3CD458;
+          font-style: initial;
+        }
+      }
+    }
+    .summary {
+      font-size: 14px;
+    }
+  }
 }
 @media (max-width: 768px) {
   .footer {
@@ -239,6 +398,12 @@ body {
   }
   .search-wrapper {
     display: none !important;
+  }
+  .tutorial-box {
+    flex-direction: column;
+    > div {
+      width: 100%;
+    }
   }
 }
 @media (min-width: 768px) and (max-width: 992px) {
