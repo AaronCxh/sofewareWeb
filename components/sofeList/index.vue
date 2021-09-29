@@ -5,10 +5,10 @@
       <a-col
         :class="`animation fadeInLeft delay-${index}`"
         v-for="(item, index) in data"
-        :xs="12"
-        :sm="8"
-        :lg="6"
-        :xxl="4"
+        :xs="xs"
+        :sm="sm"
+        :lg="lg"
+        :xxl="xxl"
         :key="item.AutoID"
       >
         <sofe-item :data="item" :index="index"></sofe-item>
@@ -28,6 +28,22 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    xs: {
+      type: Number,
+      default: 12
+    },
+    sm: {
+      type: Number,
+      default: 8
+    },
+    lg: {
+      type: Number,
+      default: 6
+    },
+    xxl: {
+      type: Number,
+      default: 4
     }
   },
   data() {

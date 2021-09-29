@@ -40,7 +40,7 @@ const state = () => ({
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes;
-    state.routes = constantRoutes.concat(routes);
+    state.routes = [].concat(routes);
   }
 };
 

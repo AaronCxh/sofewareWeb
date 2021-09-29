@@ -9,7 +9,7 @@
           <nuxt-link class="nav-link" to="/" exact-active-class="exact-active" :exact="false">首页</nuxt-link>
           <nuxt-link class="nav-link" to="/sofe">软件</nuxt-link>
           <nuxt-link class="nav-link" to="/special">专题</nuxt-link>
-          <nuxt-link class="nav-link" to="/perfect">榜单</nuxt-link>
+          <nuxt-link class="nav-link" to="/billboard">榜单</nuxt-link>
         </nav>
         <div class="fr">
           <search></search>
