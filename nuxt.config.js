@@ -38,9 +38,13 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    ['@nuxtjs/proxy']
+  ],
   proxy: {
-    '/': 'http://www.example.com' 
+    '/': {
+      target: "https://mb3.729.cn"
+    }
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

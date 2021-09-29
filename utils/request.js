@@ -1,5 +1,4 @@
 ﻿import axios from "axios";
-import store from "@/store";
 import { isObject } from "lodash";
 let count = 0;
 const messageList = [
@@ -51,16 +50,6 @@ service.interceptors.request.use(
         return ret;
       }
     ];
-    // do something before request is sent
-    if (store.getters.moduleId) {
-      config.data["moduleId"] = store.getters.moduleId;
-    }
-    if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      config.headers["X-Token"] = getToken();
-    }
     return config;
   },
   error => {
@@ -96,9 +85,6 @@ service.interceptors.response.use(
             type: "warning",
             callback() {
               count--;
-              store.dispatch("user/resetToken").then(() => {
-                location.reload();
-              });
             }
           });
         }

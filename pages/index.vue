@@ -121,6 +121,7 @@ import Swiper from "swiper/swiper-bundle.min.js";
 import "swiper/swiper-bundle.css";
 import sofeList from "@/components/sofeList";
 import tutorialList from '@/components/tutorialList'
+import { login } from '@/api/user'
 export default {
   name: "index",
   layout: "layout",
@@ -163,6 +164,10 @@ export default {
   },
   mounted() {
     this.initSwiper();
+    login({
+      username: 'admin',
+      password: '123456'
+    })
   },
   methods: {
     initSwiper() {
