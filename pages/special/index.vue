@@ -10,21 +10,21 @@
           v-for="(item, index) in list"
           :key="index"
         >
-          <router-link to="gif" class="item" append>
+          <router-link :to="item.Identifier" class="item" append>
             <div class="single-special-member">
               <div class="wrapper">
                 <div class="img-box">
                   <img
-                    data-src="https://cdn.macwk.com/public/uploads/_/originals/special-gif-1.gif"
+                    :data-src="item.NodeImage"
                     src="~assets/images/ball-loading.svg"
                     class="lazyload blur_img"
                   />
                 </div>
                 <div class="info-meta">
                   <h6 class="name">
-                    Gif动画制作
+                    {{ item.NodeName }}
                     <span class="ml-2 text-muted fs-16">
-                      (4款)
+                      ({{ item.Count }}款)
                     </span>
                   </h6>
                 </div>
@@ -44,14 +44,19 @@
 </template>
 
 <script>
+import { requestSpecial } from '@/api/special'
 export default {
   name: "special",
   layout: "layout",
   data() {
     return {
-      list: [{}, {}, {}, {}, {}, {}]
+      list: []
     };
-  }
+  },
+   async asyncData() {
+     const res = await requestSpecial()
+    return { list: res.dataList }
+   }
 };
 </script>
 

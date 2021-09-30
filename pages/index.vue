@@ -1,14 +1,22 @@
 <template>
-  <div class="app-main">
+  <div class="app-main  py-8">
     <div class="promo-wrapper">
       <div class="container">
         <div class="swiper-container" id="promo-swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img class="img-responsive" src="~assets/images/首页-恢复的_03.png" alt="" />
+              <img
+                class="img-responsive"
+                src="~assets/images/首页-恢复的_03.png"
+                alt=""
+              />
             </div>
             <div class="swiper-slide">
-              <img class="img-responsive" src="~assets/images/首页-恢复的_03.png" alt="" />
+              <img
+                class="img-responsive"
+                src="~assets/images/首页-恢复的_03.png"
+                alt=""
+              />
             </div>
           </div>
           <div class="swiper-pagination"></div>
@@ -25,28 +33,28 @@
       <div class="container">
         <a-row type="flex" justify="start" :gutter="30">
           <a-col :span="6">
-            <a href="#" class="item green-item">
+            <router-link to="special/8" class="item green-item">
               <img src="~assets/images/icon-1.png" alt="" />
               <span>新人必备</span>
-            </a>
+            </router-link>
           </a-col>
           <a-col :span="6">
-            <a href="#" class="item orange-item">
+            <router-link to="special/3" class="item orange-item">
               <img src="~assets/images/icon-2.png" alt="" />
               <span>图像处理工具</span>
-            </a>
+            </router-link>
           </a-col>
           <a-col :span="6">
-            <a href="#" class="item blue-item">
+            <router-link to="special/4" class="item blue-item">
               <img src="~assets/images/icon-3.png" alt="" />
               <span>产品经理工具</span>
-            </a>
+            </router-link>
           </a-col>
           <a-col :span="6">
-            <a href="#" class="item purple-item">
+            <router-link to="special" class="item purple-item">
               <img src="~assets/images/icon-4.png" alt="" />
               <span>更多专题</span>
-            </a>
+            </router-link>
           </a-col>
         </a-row>
       </div>
@@ -77,9 +85,11 @@
           </div>
         </div>
         <div class="bd">
-          <div class="sofe-section">
-            <sofe-list :data="sofeList"></sofe-list>
-          </div>
+          <a-spin :spinning="spinning" :delay="500">
+            <div class="sofe-section">
+              <sofe-list :data="sofeList"></sofe-list>
+            </div>
+          </a-spin>
         </div>
       </div>
     </div>
@@ -120,8 +130,9 @@
 import Swiper from "swiper/swiper-bundle.min.js";
 import "swiper/swiper-bundle.css";
 import sofeList from "@/components/sofeList";
-import tutorialList from '@/components/tutorialList'
-import { login } from '@/api/user'
+import tutorialList from "@/components/tutorialList";
+import { requestBanner } from "@/api/banner";
+import { requestRecommendSoftList, requestRecommendArticle } from "@/api/soft";
 export default {
   name: "index",
   layout: "layout",
@@ -131,45 +142,49 @@ export default {
   },
   data() {
     return {
+      banner: [],
+      test: [],
       tabs: [
-        { title: "新鲜发布" },
-        { title: "热门下载" },
-        { title: "站长推荐" },
-        { title: "最多评论" }
+        { title: "新鲜发布", value: "new" },
+        { title: "热门下载", value: "hot" },
+        { title: "站长推荐", value: "recommend" }
       ],
       sofeActive: 0,
-      sofeList: [
-        { AutoID: 1 },
-        { AutoID: 2 },
-        { AutoID: 3 },
-        { AutoID: 4 },
-        { AutoID: 5 },
-        { AutoID: 6 },
-        { AutoID: 7 },
-        { AutoID: 8 },
-        { AutoID: 9 },
-        { AutoID: 10 },
-        { AutoID: 11 },
-        { AutoID: 12 }
-      ],
+      sofeList: [],
+      spinning:false,
       tutorialActive: 0,
-      tutorialTabs: [{title: '新鲜发布'}, {title: '站长推荐'}],
-      tutorialList: [{ AutoID: 1 },
-          { AutoID: 2 },
-          { AutoID: 3 },
-          { AutoID: 4 },
-          { AutoID: 5 },
-          { AutoID: 6 },]
+      tutorialTabs: [{ title: "新鲜发布", value: 'new' }, { title: "站长推荐", value: 'recommend' }],
+      tutorialList: []
+    };
+  },
+  async asyncData(app) {
+    const [bannerData, softData, artilceData] = await Promise.all([
+      requestBanner(),
+      requestRecommendSoftList({
+        filter: "new"
+      }),
+      requestRecommendArticle({
+        filter: "new"
+      })
+    ]);
+    return {
+      banner: bannerData.dataList,
+      sofeList: softData.dataList,
+      tutorialList: artilceData.dataList
     };
   },
   mounted() {
     this.initSwiper();
-    login({
-      username: 'admin',
-      password: '123456'
-    })
   },
   methods: {
+    async getRecommendSoftList() {
+      this.spinning = true
+      const res = await requestRecommendSoftList({
+        filter: this.tabs[this.sofeActive].value
+      });
+      this.spinning = false
+      this.sofeList = res.dataList;
+    },
     initSwiper() {
       new Swiper("#promo-swiper", {
         pagination: {
@@ -185,71 +200,16 @@ export default {
     onSofeClick(e) {
       const { index } = e.currentTarget.dataset;
       this.sofeActive = index;
-      if (index == 1) {
-        this.sofeList = [
-          { AutoID: 1 },
-          { AutoID: 2 },
-          { AutoID: 3 },
-          { AutoID: 4 },
-          { AutoID: 5 },
-          { AutoID: 6 },
-          { AutoID: 7 },
-          { AutoID: 8 },
-          { AutoID: 9 },
-          { AutoID: 10 },
-          { AutoID: 11 },
-          { AutoID: 12 }
-        ];
-      } else if (index == 2) {
-        this.sofeList = [
-          { AutoID: 13 },
-          { AutoID: 14 },
-          { AutoID: 15 },
-          { AutoID: 16 },
-          { AutoID: 17 },
-          { AutoID: 18 },
-          { AutoID: 19 },
-          { AutoID: 20 },
-          { AutoID: 21 },
-          { AutoID: 22 },
-          { AutoID: 11 },
-          { AutoID: 12 }
-        ];
-      } else {
-        this.sofeList = [
-          { AutoID: 130 },
-          { AutoID: 140 },
-          { AutoID: 150 },
-          { AutoID: 160 },
-          { AutoID: 170 },
-          { AutoID: 180 },
-          { AutoID: 190 },
-          { AutoID: 200 },
-          { AutoID: 210 },
-          { AutoID: 220 },
-          { AutoID: 110 },
-          { AutoID: 120 }
-        ];
-      }
+      this.getRecommendSoftList();
     },
     onTutorialClick(e) {
       const { index } = e.currentTarget.dataset;
       this.tutorialActive = index;
-      if (index == 1) {
-        this.tutorialList = [{ AutoID: 10 },
-          { AutoID: 20 },
-          { AutoID: 30 },
-          { AutoID: 40 },
-          { AutoID: 50 },
-          { AutoID: 60 },]
-      } else {
-        this.tutorialList = [{ AutoID: 1 },
-          { AutoID: 2 },
-          { AutoID: 3 },
-          { AutoID: 4 },
-          { AutoID: 5 },
-          { AutoID: 6 },]
-      }
+      requestRecommendArticle({
+        filter: this.tutorialTabs[this.tutorialActive].value
+      }).then((res) => {
+        this.tutorialList = res.dataList
+      })
     }
   }
 };
@@ -330,7 +290,7 @@ export default {
 }
 .tutorial-wrapper {
   background-color: var(--tutorialBackgroundColor);
-  padding: 60px 0 70px
+  padding: 60px 0 70px;
 }
 </style>
 <style lang="scss">

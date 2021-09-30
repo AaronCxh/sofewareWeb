@@ -1,32 +1,7 @@
 ﻿import axios from "axios";
 import { isObject } from "lodash";
 let count = 0;
-const messageList = [
-  "取消成功",
-  "修改成功",
-  "操作成功",
-  "添加成功",
-  "删除成功",
-  "回复成功",
-  "复制成功",
-  "删除分类成功",
-  "操作成功！",
-  "赠送成功",
-  "更新成功",
-  "删除文件成功",
-  "修改优惠券成功",
-  "添加优惠券成功",
-  "添加限时活动成功",
-  "修改限时活动成功",
-  "添加满减活动成功",
-  "修改满减活动成功",
-  "添加拼团活动成功",
-  "修改拼团活动成功",
-  "添加秒杀活动成功",
-  "修改秒杀活动成功",
-  "设置成功",
-  "配置成功"
-];
+
 // create an axios instance
 const service = axios.create({
   baseURL:
@@ -101,16 +76,6 @@ service.interceptors.response.use(
           console.error(response);
           return Promise.reject(res.msg);
         } else {
-          if (
-            config.showMessage === undefined &&
-            messageList.indexOf(res.msg.trim()) !== -1
-          ) {
-            Message({
-              message: res.msg,
-              type: "success",
-              duration: 2 * 1000
-            });
-          }
           return res;
         }
     }

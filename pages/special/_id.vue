@@ -13,21 +13,10 @@
               >
                 <template slot="content">
                   <div>
-                    <router-link class="nav-link" to="gif"
-                      >Gif动画制作</router-link
-                    >
-                    <router-link class="nav-link" to="2"
-                      >Adobe 2021</router-link
-                    >
-                    <router-link class="nav-link" to="3">图像处理</router-link>
-                    <router-link class="nav-link" to="4">产品经理</router-link>
-                    <router-link class="nav-link" to="5">思维导图</router-link>
-                    <router-link class="nav-link" to="6">项目管理</router-link>
-                    <router-link class="nav-link" to="7">原型设计</router-link>
-                    <router-link class="nav-link" to="8">新人必备</router-link>
+                    <span  @click="onTab" :data-index="index" class="nav-link" :class="{active: active == index}" v-for="(item, index) in system" :key="item.Name">{{ item.Name }}</span>
                   </div>
                 </template>
-                <span>Gif动画制作 <i class="iconfont">&#xe72a;</i></span>
+                <span>{{ system[active].Name }} <i class="iconfont">&#xe72a;</i></span>
               </a-popover>
             </h1>
             <h5 class="text-muted">
@@ -46,7 +35,11 @@
                 v-for="(item, index) in list"
                 :key="index"
               >
-                <a target="_blank" href="#/sofe/1" class="sofe-wrapper__item border">
+                <router-link
+                  target="_blank"
+                  :to="`/sofe/${item.AutoID}`"
+                  class="sofe-wrapper__item border"
+                >
                   <span class="snow-dot"></span>
                   <span class="snow-dot"></span>
                   <span class="snow-dot"></span>
@@ -57,35 +50,36 @@
                   <div class="sofe-wrapper__image">
                     <img
                       :class="`img lazyload blur_img animation delay-${index} `"
-                      :data-src="
-                        require('@/assets/images/aliyun-drive-xiaobaiyang.png')
-                      "
+                      :data-src="item.Icon"
                       src="~assets/images/ball-loading.svg"
                       alt=""
                     />
                   </div>
                   <div class="sofe-wrapper__item--con">
                     <div class="sofe-wrapper__item--name">
-                      <span class="fw600">Gifox</span>
+                      <span class="fw600">{{ item.Title }}</span>
                     </div>
                     <div class="sofe-wrapper__item--version">
-                      Pro 2.2.5
+                      {{ item.Version }}
                     </div>
                     <div class="sofe-wrapper__item--summary">
-                      使用最多的图片处理
+                      {{ item.SubTitle }}
                     </div>
                   </div>
                   <div class="sofe-wrapper__item--extend">
                     <div class="download">
                       <i class="iconfont">&#xe6f9;</i>
-                      260911
+                      {{ item.DownloadCount }}
                     </div>
                     <div class="update">
                       <i class="iconfont">&#xe6ce;</i>
-                      09-04
+                      {{ item.AutoTimeStamp }}
                     </div>
                   </div>
-                </a>
+                </router-link>
+              </a-col>
+              <a-col :span="24" v-if="list.length == 0">
+                <a-empty description="暂无数据"></a-empty>
               </a-col>
             </a-row>
           </div>
@@ -96,12 +90,31 @@
 </template>
 
 <script>
+import { requestSpecialListByID, requestSystem } from "@/api/special";
 export default {
   name: "specialList",
   layout: "layout",
   data() {
     return {
-      list: [{}, {}, {}, {}, {}, {}]
+      list: [{}],
+      system: [],
+      active: 0
+    };
+  },
+  async asyncData({ params }) {
+    const [systemRes, specialRes] = await Promise.all([
+      requestSystem(),
+      requestSpecialListByID({
+        pageIndex: 1,
+        pageSize: 9999,
+        identifier: params.id,
+        systemid: 1
+      })
+    ]);
+    console.log(systemRes, specialRes)
+    return {
+      system: systemRes.dataList,
+      list: specialRes.dataList
     };
   },
   mounted() {
@@ -109,6 +122,20 @@ export default {
   },
   destroyed() {
     console.log("销毁");
+  },
+  methods: {
+    onTab(e) {
+      const { index } = e.currentTarget.dataset
+      this.active = index
+      requestSpecialListByID({
+        pageIndex: 1,
+        pageSize: 9999,
+        identifier: this.$route.params.id,
+        systemid: this.system[this.active].AutoID
+      }).then((res) => {
+        this.list = res.dataList
+      })
+    }
   }
 };
 </script>
@@ -134,6 +161,7 @@ export default {
           line-height: 1;
           margin-top: 15px;
           font-weight: 400;
+          color: inherit;
         }
         &:hover {
           transition: border-bottom-width 0.3s;
@@ -149,6 +177,10 @@ export default {
       display: block;
       padding: 12px 24px;
       font-size: 26px;
+      cursor: pointer;
+      &.active {
+        color: var(--color-default)
+      }
     }
   }
   .wrapper {

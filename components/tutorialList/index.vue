@@ -3,10 +3,10 @@
     <a-row :gutter="[20,20]">
       <a-col :class="`animation fadeInLeft delay-${index}`" :sm="24" :lg="12" v-for="(item, index) in data" :key="item.AutoID">
         <router-link :to="`artilce/${item.AutoID}`" class="tutorial-list__item border">
-          <img class="lazyload blur_img" data-src="https://cdn.macwk.com/public/uploads/_/originals/jetbrains-400-300-1.jpg" alt="">
+          <img class="lazyload blur_img" :data-src="item.ContentImage" alt="">
           <div class="tutorial-list__con">
-            <div class="tutorial-list__item--title">Adobe 系列软件安装及激活异常说明</div>
-            <div class="tutorial-list__item--time">2021-09-04</div>
+            <div class="tutorial-list__item--title">{{ item.Title }}</div>
+            <div class="tutorial-list__item--time">{{ item.AutoTimeStamp }}</div>
           </div>
           <div class="tutorial-list__item--more">
             <i class="iconfont">&#xe604;</i>

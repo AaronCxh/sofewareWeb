@@ -4,22 +4,22 @@
       <div
         class="shadow"
         :style="{
-          backgroundImage: `url(${require('@/assets/images/aliyun-drive-xiaobaiyang.png')})`
+          backgroundImage: `url(${data.Icon})`
         }"
       ></div>
       <img
         :class="`img lazyload blur_img animation delay-${index} `"
-        :data-src="require('@/assets/images/aliyun-drive-xiaobaiyang.png')"
+        :data-src="data.Icon"
         src="~assets/images/ball-loading.svg"
         alt=""
       />
     </div>
     <div class="sofe-wrapper__item--con">
       <div class="sofe-wrapper__item--version">
-        {{ data.id }} 2021 22.4.3 + Neural Filters
+        {{ data.Version }}
       </div>
-      <div class="sofe-wrapper__item--name">Adobe Photoshop</div>
-      <div class="sofe-wrapper__item--summary">使用最多的图片处理</div>
+      <div class="sofe-wrapper__item--name">{{ data.Title }}</div>
+      <div class="sofe-wrapper__item--summary">{{ data.SubTitle }}</div>
       <div class="sofe-wrapper__item--more" v-if="showMore">
         <i class="iconfont">&#xe604;</i>
       </div>

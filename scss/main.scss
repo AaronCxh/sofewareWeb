@@ -18,6 +18,23 @@
       format("truetype");
 }
 
+.nuxt-progress {
+  background-color: var(--color-default);
+}
+.ant-spin-nested-loading > div > .ant-spin {
+  max-height: initial;
+}
+.ant-spin-container {
+  &:after {
+    background-color: rgba(22,32,47,.9) !important;
+  }
+}
+.ant-spin-blur {
+  &:after {
+    opacity: 0.9;
+  }
+}
+
 .layout-min-height {
   min-height: calc(100vh - 178px);
 }

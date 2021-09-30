@@ -20,7 +20,8 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     script: [
       {
-        src: "/js/lazysize.js", defer: true
+        src: "/js/lazysize.js",
+        defer: true
       }
     ]
   },
@@ -38,14 +39,18 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    ['@nuxtjs/proxy']
-  ],
+  modules: ["@nuxtjs/proxy"],
+  axios: {
+    proxy: true
+  },
   proxy: {
-    '/': {
-      target: "https://mb3.729.cn"
+    "/include/getdata": {
+      target: "http://n0a21fdd.729.cn",
+      changeOrigin: true,
     }
   },
+  devMiddleware: {},
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     // extend(config, { isClient }) {
