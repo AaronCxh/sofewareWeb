@@ -30,7 +30,7 @@ export default {
   css: ["ant-design-vue/dist/antd.css", "@/scss/main.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["@/plugins/antd-ui", "@/plugins/permission"],
+  plugins: ["@/plugins/antd-ui", "@/plugins/permission", "@/plugins/device"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

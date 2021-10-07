@@ -5,18 +5,37 @@
         <div class="swiper-container" id="promo-swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img
-                class="img-responsive"
-                src="~assets/images/首页-恢复的_03.png"
-                alt=""
-              />
+              <div class="flex-box align-center">
+                <div class="swiper-box">
+                  <h1>无广告，无后门，安全！</h1>
+                  <p>
+                    每款Mac应用都经过Macwk.com严格测试后发布，确保应用可以和正版软件一样稳定运行使用！
+                  </p>
+                </div>
+                <img class="img" src="~assets/images/banner1.png" alt="" />
+              </div>
             </div>
             <div class="swiper-slide">
-              <img
-                class="img-responsive"
-                src="~assets/images/首页-恢复的_03.png"
-                alt=""
-              />
+              <div class="flex-box align-center">
+                <div class="swiper-box">
+                  <h1>无广告，无后门，安全！</h1>
+                  <p>
+                    网站无广告，软件无后门，欢迎监督。隐私方面本站无能为力，推荐大家安装防火墙软件禁止应用联网！
+                  </p>
+                </div>
+                <img class="img" src="~assets/images/banner1.png" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="flex-box align-center">
+                <div class="swiper-box">
+                  <h1>无广告，无后门，安全！</h1>
+                  <p>
+                    网站无广告，软件无后门，欢迎监督。隐私方面本站无能为力，推荐大家安装防火墙软件禁止应用联网！
+                  </p>
+                </div>
+                <img class="img" src="~assets/images/banner1.png" alt="" />
+              </div>
             </div>
           </div>
           <div class="swiper-pagination"></div>
@@ -33,28 +52,40 @@
       <div class="container">
         <a-row type="flex" justify="start" :gutter="30">
           <a-col :span="6">
-            <router-link to="special/8" class="item green-item">
-              <img src="~assets/images/icon-1.png" alt="" />
-              <span>新人必备</span>
-            </router-link>
+            <div>
+              <router-link to="special/8" class="item green-item">
+                <img src="~assets/images/icon-1.png" alt="" />
+                <span>新人必备</span>
+              </router-link>
+              <div class="text text-muted">软件</div>
+            </div>
           </a-col>
           <a-col :span="6">
-            <router-link to="special/3" class="item orange-item">
-              <img src="~assets/images/icon-2.png" alt="" />
-              <span>图像处理工具</span>
-            </router-link>
+            <div>
+              <router-link to="special/3" class="item orange-item">
+                <img src="~assets/images/icon-2.png" alt="" />
+                <span>图像处理工具</span>
+              </router-link>
+              <div class="text text-muted">文章</div>
+            </div>
           </a-col>
           <a-col :span="6">
-            <router-link to="special/4" class="item blue-item">
-              <img src="~assets/images/icon-3.png" alt="" />
-              <span>产品经理工具</span>
-            </router-link>
+            <div>
+              <router-link to="special/4" class="item blue-item">
+                <img src="~assets/images/icon-3.png" alt="" />
+                <span>产品经理工具</span>
+              </router-link>
+              <div class="text text-muted">专题</div>
+            </div>
           </a-col>
           <a-col :span="6">
-            <router-link to="special" class="item purple-item">
-              <img src="~assets/images/icon-4.png" alt="" />
-              <span>更多专题</span>
-            </router-link>
+            <div>
+              <router-link to="special" class="item purple-item">
+                <img src="~assets/images/icon-4.png" alt="" />
+                <span>更多专题</span>
+              </router-link>
+              <div class="text text-muted">精选</div>
+            </div>
           </a-col>
         </a-row>
       </div>
@@ -133,6 +164,7 @@ import sofeList from "@/components/sofeList";
 import tutorialList from "@/components/tutorialList";
 import { requestBanner } from "@/api/banner";
 import { requestRecommendSoftList, requestRecommendArticle } from "@/api/soft";
+
 export default {
   name: "index",
   layout: "layout",
@@ -151,9 +183,12 @@ export default {
       ],
       sofeActive: 0,
       sofeList: [],
-      spinning:false,
+      spinning: false,
       tutorialActive: 0,
-      tutorialTabs: [{ title: "新鲜发布", value: 'new' }, { title: "站长推荐", value: 'recommend' }],
+      tutorialTabs: [
+        { title: "新鲜发布", value: "new" },
+        { title: "站长推荐", value: "recommend" }
+      ],
       tutorialList: []
     };
   },
@@ -178,11 +213,11 @@ export default {
   },
   methods: {
     async getRecommendSoftList() {
-      this.spinning = true
+      this.spinning = true;
       const res = await requestRecommendSoftList({
         filter: this.tabs[this.sofeActive].value
       });
-      this.spinning = false
+      this.spinning = false;
       this.sofeList = res.dataList;
     },
     initSwiper() {
@@ -194,7 +229,13 @@ export default {
         navigation: {
           nextEl: ".button-next",
           prevEl: ".button-prev"
-        }
+        },
+        centeredSlides: true,
+        slidesPerView: 1.11,
+        spaceBetween: 0,
+        centeredSlidesBounds: true,
+        loop: true,
+        breakpoints: {}
       });
     },
     onSofeClick(e) {
@@ -207,9 +248,9 @@ export default {
       this.tutorialActive = index;
       requestRecommendArticle({
         filter: this.tutorialTabs[this.tutorialActive].value
-      }).then((res) => {
-        this.tutorialList = res.dataList
-      })
+      }).then(res => {
+        this.tutorialList = res.dataList;
+      });
     }
   }
 };
@@ -294,6 +335,8 @@ export default {
 }
 </style>
 <style lang="scss">
+@import "@/scss/var/var";
+@import "@/scss/mixins/mixins";
 .promo-wrapper {
   position: relative;
   margin: 24px 0 33px;
@@ -331,6 +374,190 @@ export default {
     }
     &.button-next {
       right: 20px;
+    }
+  }
+}
+#promo-swiper {
+  .swiper-slide {
+    height: 400px;
+    background: #1c283b;
+    .flex-box {
+      height: 400px;
+    }
+    .swiper-box {
+      width: 600px;
+      min-width: 600px;
+      padding-left: 144px;
+      h1 {
+        font-size: 33px;
+        font-weight: 400;
+        margin-bottom: 8px;
+        color: var(--color-fontColor);
+      }
+      p {
+        font-size: 18px;
+        color: var(--color-textColor);
+        line-height: 1.9;
+        opacity: 0.7;
+        margin: 0;
+      }
+    }
+    .img {
+      position: absolute;
+      right: 100px;
+      top: 20px;
+      width: auto;
+      height: calc(100% - 40px);
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  #promo-swiper {
+    .swiper-slide {
+      .swiper-box {
+        width: 100%;
+        min-width: 100%;
+        padding: 0 80px;
+        z-index: 100;
+        text-align: center;
+      }
+      .img {
+        opacity: 0.1;
+      }
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1260px) {
+  #promo-swiper {
+    .swiper-slide {
+      .swiper-box {
+        padding-left: 80px;
+        width: 460px;
+        min-width: 460px;
+      }
+      .img {
+        width: 360px;
+        height: auto;
+        top: 50px;
+        right: 80px;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  #promo-swiper {
+    .swiper-pagination {
+      display: none;
+    }
+    .btn {
+      display: none;
+    }
+    .swiper-slide {
+      height: auto;
+      height: 180px;
+      background-color: transparent;
+      padding: 16px 9px;
+      &.swiper-slide-active {
+        .flex-box {
+          background-color: #50a1ff;
+          box-shadow: 0 0 18px rgba(0, 0, 0, 0.06);
+        }
+        .swiper-box {
+          h1 {
+            color: #fff;
+          }
+          p {
+            color: #fff;
+          }
+        }
+      }
+      .flex-box {
+        height: 100%;
+        background-color: #d4e4f7;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .swiper-box {
+        padding: 0;
+        text-align: center;
+        width: 100%;
+        min-width: 100%;
+        h1 {
+          font-size: 20px;
+          font-weight: 700;
+        }
+        p {
+          font-size: 15px;
+          @include nowrap();
+          padding: 0 50px;
+        }
+      }
+      .img {
+        display: none;
+      }
+    }
+  }
+  .promo-wrapper {
+    margin: 0 0 16px;
+    .container {
+      padding: 0;
+    }
+  }
+  .category-wrapper {
+    .container {
+      padding: 0 32px;
+    }
+    .item {
+      height: auto !important;
+      padding: 16px;
+      img {
+        margin-right: 0 !important;
+      }
+      span {
+        display: none;
+      }
+    }
+    .text {
+      text-align: center;
+      line-height: 28px;
+      margin-top: 8px;
+    }
+  }
+  .sofe-wrapper {
+    padding: 30px 0 0 !important;
+    .hd {
+      padding: 0 17px;
+      margin-bottom: 12px;
+      h1 {
+        font-weight: 700;
+        font-size: 20px;
+        img {
+          display: none;
+        }
+      }
+      nav,
+      .fr {
+        display: none;
+      }
+    }
+  }
+  .tutorial-wrapper {
+    padding: 32px 0 !important;
+    display: none !important;
+    .hd {
+      padding: 0 17px;
+      margin-bottom: 12px;
+      h1 {
+        font-weight: 700;
+        font-size: 20px;
+        img {
+          display: none;
+        }
+      }
+      nav,
+      .fr {
+        display: none !important;
+      }
     }
   }
 }
