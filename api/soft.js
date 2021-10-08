@@ -33,3 +33,48 @@ export function requestRecommendArticle(params) {
     }
   });
 }
+
+/**
+ * 获取软件详情
+ * @param {Number} id 
+ * @returns 
+ */
+export function requestSoftDetailByID(id) {
+  return request({
+    url: "/include/getdata",
+    params: {
+      apiname: "getsoftdetail",
+      id: id
+    }
+  });
+}
+
+/**
+ * 点赞
+ */
+export function postLikeIt(id) {
+  return request({
+    url: "/include/getdata",
+    method: 'post',
+    data: {
+      apiname: "ding",
+      id
+    }
+  });
+}
+
+
+/**
+ * 获取相关软件
+ * @param {Number} id 
+ * @returns 
+ */
+export function requestRelevancySoftList(id) {
+  return request({
+    url: "/include/getdata",
+    params: {
+      apiname: "getrelatedsoft",
+      id
+    }
+  })
+}

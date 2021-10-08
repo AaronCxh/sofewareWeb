@@ -47,7 +47,6 @@ const mutations = {
 const actions = {
   setRouter({ commit }, routes) {
     return new Promise(resolve => {
-      console.log("SET_ROUTES", routes);
       commit("SET_ROUTES", routes);
       resolve(routes);
     });

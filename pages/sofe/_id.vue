@@ -19,23 +19,24 @@
           <a-col :xs="24" :sm="24" :lg="12">
             <div class="sofeDetail-header__left">
               <div class="flex-box">
-                <img
-                  src="~assets/images/adobe-photoshop-2020-1.png"
-                  class="lazyload"
-                />
+                <img :src="data.Icon" class="lazyload" />
                 <div class="con">
                   <div class="name">
-                    Gifox Pro 2.2.5 破解版 (最好用的Gif动画录制工具)
-                    <span class="text-muted">(TNT + 免激活)</span>
+                    {{ data.Title }}
+                    <!-- <span class="text-muted">(TNT + 免激活)</span> -->
                   </div>
                   <div class="action-group">
                     <button class="button button-default" @click="show = true">
                       <i class="iconfont">&#xe6f8;</i>
                       立即下载
                     </button>
-                    <button class="button button-default-reverse">
+                    <button
+                      class="button button-default-reverse"
+                      :class="{ disabled: isLike }"
+                      @click="onLike"
+                    >
                       <i class="iconfont">&#xe6fa;</i>
-                      已赞 (1000)
+                      {{ isLike ? "已赞" : "赞" }} ({{ likeCount }})
                     </button>
                   </div>
                 </div>
@@ -43,23 +44,13 @@
             </div>
           </a-col>
           <a-col :xs="24" :sm="24" :lg="12">
-            <div class="sofeDetail-header__right">
-              <div class="swiper-container" id="promo-swiper">
+            <div class="sofeDetail-header__right promo-wrapper">
+              <div class="swiper-container" id="detail-swiper">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <img
-                      src="https://cdn.macwk.com/public/uploads/_/originals/gifox-screen-01-1.jpg?x-oss-process=image/auto-orient,1/interlace,1/resize,p_60/quality,q_90"
-                      alt=""
-                    />
-                  </div>
-                  <div class="swiper-slide">
-                    <img
-                      src="https://cdn.macwk.com/public/uploads/_/originals/gifox-screen-01-1.jpg?x-oss-process=image/auto-orient,1/interlace,1/resize,p_60/quality,q_90"
-                      alt=""
-                    />
+                  <div class="swiper-slide" v-for="item in data.PhotoList">
+                    <img :src="item.Img" alt="" />
                   </div>
                 </div>
-                <div class="swiper-pagination"></div>
                 <div class="btn button-prev">
                   <i class="iconfont">&#xe6d4;</i>
                 </div>
@@ -79,43 +70,45 @@
             <div class="sofeDetail-info__cell">
               <div class="box">
                 <div class="label text-muted">大小</div>
-                <div class="value">24.4</div>
-                <div class="suffix">MB</div>
+                <div class="value">{{ data.Size }}</div>
+                <div class="suffix">{{ data.Unit }}</div>
               </div>
             </div>
             <div class="sofeDetail-info__cell">
               <div class="box">
                 <div class="label text-muted">下载</div>
-                <div class="value">10445</div>
-                <div class="suffix">MB</div>
+                <div class="value">{{ data.DownloadCount }}</div>
+                <div class="suffix">次</div>
               </div>
             </div>
             <div class="sofeDetail-info__cell">
               <div class="box">
                 <div class="label text-muted">语言</div>
-                <div class="value">英文</div>
-                <div class="suffix">EN</div>
+                <div class="value">{{ data.Language }}</div>
+                <div class="suffix">{{ data.Language_EN }}</div>
               </div>
             </div>
             <div class="sofeDetail-info__cell">
               <div class="box">
                 <div class="label text-muted">类别</div>
                 <div class="value">
-                  <a href="#" class="text-muted">动画制作</a>
+                  <router-link :to="{name: 'sofe',query: {nodeName: data.Identifier}}" class="text-muted">
+                    {{ data.NodeName }} <i class="iconfont">&#xe63d;</i>
+                  </router-link>
                 </div>
-                <div class="suffix">MB</div>
+                <div class="suffix">{{ data.Identifier }}</div>
               </div>
             </div>
             <div class="sofeDetail-info__cell">
               <div class="box">
                 <div class="label text-muted">更新时间</div>
-                <div class="value">2021-02-22</div>
-                <div class="suffix">星期一</div>
+                <div class="value">{{ data.AutoTimeStamp }}</div>
+                <div class="suffix">{{ data.Week }}</div>
               </div>
             </div>
           </div>
           <div class="sofeDetail-content">
-            <div class="step-read">
+            <div class="step-read" v-if="false">
               <div class="container">
                 <div class="hd">
                   <div class="flex-box align-center">
@@ -192,59 +185,15 @@
                 <div class="bd">
                   <div class="soft-blockquote">
                     <p>
-                      Gifox Por 2
-                      mac破解版是一款可以将您的屏幕录制为动画GIF的工具，提供了全屏、窗口和部分选择模式，轻松帮您录制GIF动画，Gifox
-                      for Mac支持自定义快捷键，使用更加便捷。Gifox Por
-                      是mac最好用的gif录制工具！
+                      {{ data.Summary }}
                     </p>
                   </div>
-                  <div class="rows-inner">
-                    <a-row class="row" type="flex" align="middle" :gutter="30">
-                      <a-col :xs="24" :sm="24" :md="12">
-                        <img
-                          class="img lazyload"
-                          src="~assets/images/ball-loading.svg"
-                          data-src="https://cdn.macwk.com/public/uploads/_/originals/gifox-features-01.jpg"
-                          alt=""
-                        />
-                      </a-col>
-                      <a-col :xs="24" :sm="24" :md="10" class="fr">
-                        <div class="con">
-                          <h4 class="title">精心设计制作</h4>
-                          <div class="summary">
-                            Gifox Pro 2
-                            是一个菜单栏应用程序，可将录制gif动画（全屏或者区域模式）
-                            - 截图和以及录制全屏视频
-                          </div>
-                        </div>
-                      </a-col>
-                    </a-row>
-                    <a-row class="row" type="flex" align="middle" :gutter="30">
-                      <a-col :xs="24" :sm="24" :md="12">
-                        <img
-                          class="img lazyload"
-                          src="~assets/images/ball-loading.svg"
-                          data-src="https://cdn.macwk.com/public/uploads/_/originals/gifox-features-01.jpg"
-                          alt=""
-                        />
-                      </a-col>
-                      <a-col :xs="24" :sm="24" :md="10" class="fr">
-                        <div class="con">
-                          <h4 class="title">精心设计制作</h4>
-                          <div class="summary">
-                            Gifox Pro 2
-                            是一个菜单栏应用程序，可将录制gif动画（全屏或者区域模式）
-                            - 截图和以及录制全屏视频
-                          </div>
-                        </div>
-                      </a-col>
-                    </a-row>
-                  </div>
+                  <div class="rows-inner" v-html="data.Content"></div>
                   <div class="text-center">
                     <a
                       class="button button-default-reverse"
                       target="_blank"
-                      href="https://macwk.com/soft/gifox"
+                      :href="data.OfficialAddress"
                       >进入官方网站了解更多</a
                     >
                   </div>
@@ -268,46 +217,44 @@
                     >
                       <a
                         target="_blank"
-                        href="#/sofe/1"
+                        :href="`#/sofe/${item.AutoID}`"
                         class="sofe-wrapper__item border"
                       >
                         <div class="sofe-wrapper__image">
                           <div
                             class="shadow"
                             :style="{
-                              backgroundImage: `url(${require('@/assets/images/aliyun-drive-xiaobaiyang.png')})`
+                              backgroundImage: `url(${item.Icon})`
                             }"
                           ></div>
                           <img
                             :class="
                               `img lazyload blur_img animation delay-${index} `
                             "
-                            :data-src="
-                              require('@/assets/images/aliyun-drive-xiaobaiyang.png')
-                            "
+                            :data-src="item.Icon"
                             src="~assets/images/ball-loading.svg"
                             alt=""
                           />
                         </div>
                         <div class="sofe-wrapper__item--con">
                           <div class="sofe-wrapper__item--version">
-                            Pro 2.2.5
+                            {{ item.Version }}
                           </div>
                           <div class="sofe-wrapper__item--name">
-                            <span class="fw400">Gifox</span>
+                            <span class="fw400">{{ item.Title }}</span>
                           </div>
                           <div class="sofe-wrapper__item--summary">
-                            使用最多的图片处理
+                            {{ item.SubTitle }}
                           </div>
                         </div>
                         <div class="sofe-wrapper__item--extend">
                           <div class="download">
                             <i class="iconfont">&#xe6f9;</i>
-                            260911
+                            {{ item.DownloadCount }}
                           </div>
                           <div class="update">
                             <i class="iconfont">&#xe6ce;</i>
-                            09-04
+                            {{ item.AutoTimeStamp }}
                           </div>
                         </div>
                       </a>
@@ -329,24 +276,20 @@
       :closable="false"
     >
       <div class="download-list">
-        <div class="download-list__item">
-          <img class="icon" src="~assets/images/icon-download.png" alt="">
+        <div class="download-list__item" v-for="item in data.DownloadList">
+          <img class="icon" :src="item.Icon" alt="" />
           <div class="con">
-            <a class="title" href="#" target="_blank">
-              <b>天翼云盘</b>
-              <span>(提取码/密码：<i>1cah</i>)</span>
-            </a>
-            <div class="summary">不限速，但是需要注册</div>
-          </div>
-        </div>
-         <div class="download-list__item">
-          <img class="icon" src="~assets/images/icon-download.png" alt="">
-          <div class="con">
-            <a class="title" href="#" target="_blank">
-              <b>百度网盘</b>
-              <span>(提取码/密码：<i>wfev</i>)</span>
-            </a>
-            <div class="summary">百度网盘目前全网没有稳定可用的高速下载工具</div>
+            <span
+              class="title"
+              @click="onDownLoad(item.DownloadUrl, item.ExtractCode)"
+            >
+              <b>{{ item.Name }}</b>
+              <span
+                >(提取码/密码：<i>{{ item.ExtractCode }}</i
+                >)</span
+              >
+            </span>
+            <div class="summary">{{ item.Remark }}</div>
           </div>
         </div>
       </div>
@@ -357,30 +300,63 @@
 <script>
 import Swiper from "swiper/swiper-bundle.min.js";
 import "swiper/swiper-bundle.css";
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
+import {
+  requestSoftDetailByID,
+  postLikeIt,
+  requestRelevancySoftList
+} from "@/api/soft";
+
+function copy(txt) {
+  return new Promise(resolve => {
+    let transfer = document.createElement("input");
+    document.body.appendChild(transfer);
+    transfer.value = txt;
+    transfer.focus();
+    transfer.select();
+    if (document.execCommand("copy")) {
+      document.execCommand("copy");
+    }
+    transfer.blur();
+    document.body.removeChild(transfer);
+    resolve();
+  });
+}
 export default {
   name: "sofeDetail",
   layout: "layout",
   data() {
     return {
-      list: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
-      show: false
+      list: [],
+      show: false,
+      data: {},
+      likeCount: 0,
+      isLike: false
     };
   },
   computed: {
-    ...mapGetters(['mode'])
+    ...mapGetters(["mode", "device"])
   },
   mounted() {
-    console.log("软件详情");
     this.initSwiper();
+    this.getDetail();
+    this.getRelevancySoftList();
   },
   methods: {
+    getRelevancySoftList() {
+      requestRelevancySoftList(this.$route.params.id).then(res => {
+        this.list = res.dataList;
+      });
+    },
+    getDetail() {
+      requestSoftDetailByID(this.$route.params.id).then(res => {
+        console.log("软件详情", res);
+        this.data = res;
+        this.likeCount = res.Ding;
+      });
+    },
     initSwiper() {
-      new Swiper("#promo-swiper", {
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        },
+      new Swiper("#detail-swiper", {
         navigation: {
           nextEl: ".button-next",
           prevEl: ".button-prev"
@@ -388,9 +364,52 @@ export default {
       });
     },
     handleOk() {
-      console.log('确定')
+      console.log("确定");
     },
-    handleCancel() {}
+    handleCancel() {},
+    onLike() {
+      if (!this.isLike) {
+        this.likeCount += 1;
+        this.isLike = true;
+        postLikeIt(this.$route.params.id).then(res => {
+          console.log(res);
+        });
+      } else {
+        this.$message.warn({
+          content: h => {
+            return h("div", "您已经点赞过了哦");
+          },
+          duration: 3
+        });
+      }
+    },
+    onDownLoad(url, code) {
+      copy(code).then(() => {
+        this.$message.info({
+          content: h => {
+            return h("div", { class: "test-class" }, [
+              `天翼云盘提取码「${code}」复制成功，到下载页面的密码/提取码输入框粘贴即可。`,
+              h(
+                "a",
+                {
+                  attrs: {
+                  },
+                  on: {
+                    click: this.onWinOpen.bind(this, url)
+                  }
+                },
+                "点我下载"
+              )
+            ]);
+          },
+          duration: 3
+        });
+      });
+      this.onWinOpen(url)
+    },
+    onWinOpen(url) {
+      window.open(url);
+    }
   }
 };
 </script>
@@ -505,13 +524,26 @@ export default {
         }
         .button-default {
           min-width: 200px;
+          .iconfont {
+            color: #fff;
+          }
         }
         .button-default-reverse {
           min-width: 166px;
           margin-left: 15px;
+          .iconfont {
+            color: var(--color-default);
+            transition: all 0.3s;
+          }
           &:hover {
             background: $color-default;
             color: #fff;
+            .iconfont {
+              color: #fff;
+            }
+          }
+          &.disabled {
+            opacity: 0.65;
           }
         }
       }
@@ -552,6 +584,15 @@ export default {
         opacity: 0.7;
         a {
           opacity: 1;
+          .iconfont {
+            font-weight: 400;
+          }
+          &:hover {
+            color: var(--color-default) !important;
+            .iconfont {
+              color: inherit;
+            }
+          }
         }
       }
       .suffix {
@@ -692,8 +733,15 @@ export default {
     }
   }
 }
+
+</style>
+
+<style lang="scss" scoped>
 .sofe-wrapper__item {
   background: rgba($color: #172131, $alpha: 0.9);
+  &:hover {
+    background-color: #172131;
+    box-shadow: 0 0 36px rgba(9, 13, 19, 0.4);
+  }
 }
-
 </style>

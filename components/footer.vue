@@ -28,6 +28,8 @@ export default {};
 @import "@/scss/var/var.scss";
 .footer {
   background: #1c283b;
+  font-size: 0;
+  line-height: 1;
   nav {
     color: #a0b4c8;
   }

@@ -337,46 +337,7 @@ export default {
 <style lang="scss">
 @import "@/scss/var/var";
 @import "@/scss/mixins/mixins";
-.promo-wrapper {
-  position: relative;
-  margin: 24px 0 33px;
-  @at-root .swiper-pagination {
-    .swiper-pagination-bullet {
-      width: 30px !important;
-      height: 2px !important;
-      background: rgba($color: #fff, $alpha: 0.9) !important;
-      &.swiper-pagination-bullet-active {
-        background: #a0b4c8 !important;
-      }
-    }
-  }
-  @at-root .swiper-container {
-    border-radius: 6px;
-  }
-  .btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    background: rgba($color: #000000, $alpha: 0.8);
-    cursor: pointer;
-    .iconfont {
-      color: #a0b4c8;
-    }
-    &.button-prev {
-      left: 20px;
-    }
-    &.button-next {
-      right: 20px;
-    }
-  }
-}
+
 #promo-swiper {
   .swiper-slide {
     height: 400px;

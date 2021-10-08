@@ -46,7 +46,7 @@ export default {
   proxy: {
     "/include/getdata": {
       target: "http://n0a21fdd.729.cn",
-      changeOrigin: true,
+      changeOrigin: true
     }
   },
   devMiddleware: {},

@@ -145,14 +145,25 @@
 </template>
 
 <script>
+import { requestFeedBackList, postFeedBack } from "@/api/feedback";
 export default {
   layout: "layout",
   name: "feedback",
   data() {
-    return {};
+    return {
+      feedBackList: []
+    };
+  },
+  async asyncData() {
+    const feedBackList = await requestFeedBackList({
+      pageIndex: 1,
+      pageSize: 10
+    });
+    return { feedBackList: feedBackList };
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  
 </style>

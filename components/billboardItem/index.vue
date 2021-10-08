@@ -1,45 +1,37 @@
 ﻿<template>
   <div class="item">
-    <a href="#/sofe/1" class="" target="_blank"
+    <a :href="`#/sofe/${data.AutoID}`" class="" target="_blank"
       ><div class="flex-box align-center">
         <div class="box-icon mb-0 mr-4 delay-0">
           <img
             class="lazyload img"
-            data-src="https://cdn.macwk.com/public/uploads/_/originals/todesk.png"
+            :data-src="data.Icon"
+            src="~assets/images/ball-loading.svg"
           />
         </div>
         <div class="con">
           <h5 class="title">
-            ToDesk
+            {{ data.Title }}
           </h5>
           <p class="text text-muted">
-            流畅的远程控制软件
+            {{ data.SubTitle }}
           </p>
         </div>
         <div>
           <button class="btn btn-link px-0">
-            <i class="icon-download fs-26"></i>
+            <i class="iconfont">&#xe6f8;</i>
           </button>
         </div></div
     ></a>
     <div class="box-body">
       <p class="text-muted summary">
-        ToDesk for Mac 是一款免费而流畅的远程协助软件。ToDesk 支持 1080P
-        高清屏幕控制以及文件传输。通过多区域机房、G级宽带服务器加速以确保您每一次的远程访问稳定、流畅。在安全方面，通讯数据使用
-        `端到端加密`，`连接密码仅存于您的设备`，ToDesk
-        官方也无法窥探您的桌面以确保您的每次连接都是安全可靠的。
+        {{ data.Summary }}
       </p>
       <div class="swiper-container promo-wrapper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
+          <div class="swiper-slide" v-for="item in data.PhotoList">
             <img
-              src="https://cdn.macwk.com/public/uploads/_/originals/todesk-screen-02.jpg?x-oss-process=image/auto-orient,1/interlace,1/resize,p_60/quality,q_90"
-              alt=""
-            />
-          </div>
-          <div class="swiper-slide">
-            <img
-              src="https://cdn.macwk.com/public/uploads/_/originals/todesk-screen-02.jpg?x-oss-process=image/auto-orient,1/interlace,1/resize,p_60/quality,q_90"
+              :src="item.Img"
               alt=""
             />
           </div>
@@ -135,6 +127,19 @@ export default {
   }
   .promo-wrapper {
     margin: 16px 0 0;
+  }
+  .btn {
+    .iconfont {
+      font-size: 26px;
+      font-weight: 300;
+    }
+  }
+  a {
+    &:hover {
+      .title {
+        color: var(--color-default);
+      }
+    }
   }
 }
 </style>
