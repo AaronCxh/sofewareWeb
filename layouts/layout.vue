@@ -1,10 +1,8 @@
 ﻿<template>
+    <!-- style="overflow:auto"
+    v-infinite-scroll="onReachBottom" -->
   <div
-    class="app-wrapper"
-    v-infinite-scroll="onReachBottom"
-    style="overflow:auto"
-    :infinite-scroll-distance="100"
-    :infinite-scroll-immediate="false"
+    :class="`app-wrapper device-${device}`"
   >
     <topbar></topbar>
     <navbar></navbar>
@@ -19,12 +17,16 @@
 import topbar from "../components/topbar.vue";
 import pageFooter from "../components/footer.vue";
 import navbar from "../components/navbar.vue";
+import { mapGetters } from 'vuex'
 export default {
   name: "layout",
   components: {
     topbar,
     pageFooter,
     navbar
+  },
+  computed: {
+    ...mapGetters(['device'])
   },
   methods: {
     onReachBottom() {

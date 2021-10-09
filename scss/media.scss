@@ -1,0 +1,152 @@
+﻿@import "./var/var.scss";
+@import "./mixins/mixins.scss";
+@import "./common/common.scss";
+
+@media (max-width: 768px) {
+  .footer {
+    nav {
+      display: none;
+    }
+  }
+  .navbar {
+    nav {
+      display: none !important;
+    }
+  }
+  .artilce-detail {
+    .artilce-content {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+  .topbar {
+    display: none !important;
+  }
+  .search-wrapper {
+    display: none !important;
+  }
+  .tutorial-box {
+    flex-direction: column;
+    > div {
+      width: 100%;
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .container {
+    max-width: 768px;
+  }
+  .footer {
+    nav {
+      display: none;
+    }
+  }
+  .sofe-inner {
+    .container {
+      max-width: 660px;
+    }
+  }
+  .w-col {
+    width: (100% / 2);
+  }
+  .app-layout {
+    @include b(app-content) {
+      @include e(header) {
+      }
+      @include e(body) {
+      }
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1260px) {
+  .container {
+    max-width: 992px;
+  }
+  .bibei-wrapper {
+    .ant-col {
+      width: (100% / 4) !important;
+    }
+  }
+  .sofe-inner {
+    .container {
+      max-width: 860px;
+    }
+  }
+  .w-col {
+    width: (100% / 3);
+    &:nth-child(10n + 10) {
+      display: none;
+    }
+  }
+  .app-layout {
+    @include b(app-content) {
+      @include e(list) {
+        @include m(header) {
+        }
+        @include m(body) {
+        }
+      }
+      @include e(info) {
+      }
+    }
+  }
+}
+@media (min-width: 1260px) and (max-width: 1500px) {
+  .container {
+    max-width: 1200px;
+  }
+  .bibei-wrapper {
+    .ant-col {
+      width: (100% / 5) !important;
+    }
+  }
+  .sofe-inner {
+    .container {
+      max-width: 1080px;
+    }
+  }
+  .w-col {
+    width: (100% / 4);
+    &:nth-child(10n + 9),
+    &:nth-child(10n + 10) {
+      display: none !important;
+    }
+  }
+  .app-layout {
+    @include b(app-content) {
+      @include e(list) {
+        @include m(header) {
+        }
+        @include m(body) {
+        }
+      }
+      @include e(info) {
+      }
+    }
+  }
+}
+@media (min-width: 1500px) {
+  .container {
+    max-width: 1440px;
+  }
+  .sofe-inner {
+    .container {
+      max-width: 1240px;
+    }
+  }
+  .w-col {
+    width: (100% / 5);
+  }
+  .app-layout {
+    @include b(app-content) {
+      @include e(list) {
+        @include m(header) {
+        }
+        @include m(body) {
+        }
+      }
+      @include e(info) {
+      }
+    }
+  }
+}

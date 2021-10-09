@@ -1,5 +1,9 @@
 ﻿<template>
-  <div class="billboard-layout layout-min-height">
+  <div
+    class="billboard-layout layout-min-height"
+    style="overflow:auto"
+    v-infinite-scroll="onReachBottom"
+  >
     <div class="inner">
       <div class="hd">
         <h1>精彩软件推荐</h1>
@@ -7,7 +11,12 @@
       </div>
       <div class="bd">
         <a-row :gutter="[30, 30]">
-          <a-col :span="12" v-for="(item, index) in list" :key="index" :class="`animation fadeInLeft delay-${index}`">
+          <a-col
+            :span="12"
+            v-for="(item, index) in list"
+            :key="index"
+            :class="`animation fadeInLeft delay-${index}`"
+          >
             <billboard-item :data="item"></billboard-item>
           </a-col>
         </a-row>
@@ -40,14 +49,14 @@ export default {
   },
   methods: {
     getList(pageNum = 1) {
-      this.spinning = true
+      this.spinning = true;
       return new Promise(resolve => {
         this.loading = true;
         requestBillboardList({
           pageIndex: pageNum,
-          pageSize: 4
+          pageSize: 10
         }).then(res => {
-          this.spinning = false
+          this.spinning = false;
           if (
             res.TotalCount - res.PageSize * (res.PageIndex - 1) <=
             res.PageSize
@@ -73,8 +82,8 @@ export default {
       });
     },
     onReachBottom() {
-      console.log('bbbbbbbb')
-      this.pageNum != 0 && this.getList(this.pageNum + 1)
+      console.log("bbbbbbbb");
+      this.pageNum != 0 && this.getList(this.pageNum + 1);
     }
   }
 };

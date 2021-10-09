@@ -1,9 +1,9 @@
 ﻿<template>
   <div class="bibei-wrapper layout-min-height">
-    <div class="container">
+    <div class="container" v-for="section in list">
       <div class="inner">
         <div class="hd">
-          <h4>系统工具</h4>
+          <h4>{{ section.NodeName }}</h4>
         </div>
         <a-row :gutter="[20, 20]">
           <a-col
@@ -11,17 +11,17 @@
             :md="8"
             :lg="6"
             :xl="4"
-            v-for="(item, index) in list"
+            v-for="(item, index) in section.SoftList"
             :key="index"
           >
-            <a href="/soft/paste" class="item" target="_blank">
+            <router-link :to="`sofe/${item.AutoID}`" target="_blank" class="item">
               <div class="inner">
-                <span class="text-muted ">3.0.11</span>
+                <span class="text-muted ">{{ item.Version }}</span>
                 <h4 class="nowrap">
-                  Paste
+                  {{ item.Title }}
                 </h4>
                 <p class="text-muted">
-                  剪切板增强工具
+                  {{ item.SubTitle }}
                 </p>
                 <div class="btn-box">
                   <i class="iconfont">&#xe604;</i>
@@ -31,51 +31,13 @@
                   <img
                     class="lazyload img"
                     src="~assets/images/ball-loading.svg"
-                    data-src="https://cdn.macwk.com/public/uploads/_/originals/paste-bs.png"
+                    :data-src="item.Icon"
                   />
                 </div>
               </div>
-            </a>
-          </a-col>
-        </a-row>
-      </div>
-    </div>
-    <div class="container">
-      <div class="inner">
-        <div class="hd">
-          <h4>系统工具</h4>
-        </div>
-        <a-row :gutter="[20, 20]">
-          <a-col
-            :span="12"
-            :md="8"
-            :lg="6"
-            :xl="4"
-            v-for="(item, index) in list"
-            :key="index"
-          >
-            <a href="/soft/paste" class="item" target="_blank">
-              <div class="inner">
-                <span class="text-muted ">3.0.11</span>
-                <h4 class="nowrap">
-                  Paste
-                </h4>
-                <p class="text-muted">
-                  剪切板增强工具
-                </p>
-                <div class="btn-box">
-                  <i class="iconfont">&#xe604;</i>
-                </div>
-                <div class="icon-box">
-                  <div class="border-layer"></div>
-                  <img
-                    class="lazyload img"
-                    src="~assets/images/ball-loading.svg"
-                    data-src="https://cdn.macwk.com/public/uploads/_/originals/paste-bs.png"
-                  />
-                </div>
-              </div>
-            </a>
+            </router-link>
+
+            <!-- <a href="/soft/paste" class="item"> </a> -->
           </a-col>
         </a-row>
       </div>
@@ -84,12 +46,20 @@
 </template>
 
 <script>
+import { requestBibeiSoftList } from "@/api/soft";
 export default {
   layout: "layout",
   name: "bibei",
+  async asyncData({ app }) {
+    const res = await requestBibeiSoftList();
+    console.log(res);
+    return {
+      list: res.dataList
+    };
+  },
   data() {
     return {
-      list: [{}, {}, {}, {}, {}, {}, {}, {}, {}]
+      list: []
     };
   }
 };

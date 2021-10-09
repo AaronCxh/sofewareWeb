@@ -51,40 +51,13 @@
     <div class="category-wrapper">
       <div class="container">
         <a-row type="flex" justify="start" :gutter="30">
-          <a-col :span="6">
+          <a-col :span="6" v-for="nav in navTabs" :key="nav.name">
             <div>
-              <router-link to="special/8" class="item green-item">
-                <img src="~assets/images/icon-1.png" alt="" />
-                <span>新人必备</span>
+              <router-link :to="nav.url" :class="`item ${nav.class}`">
+                <img :src="nav.icon" alt="" />
+                <span>{{ nav.name }}</span>
               </router-link>
-              <div class="text text-muted">软件</div>
-            </div>
-          </a-col>
-          <a-col :span="6">
-            <div>
-              <router-link to="special/3" class="item orange-item">
-                <img src="~assets/images/icon-2.png" alt="" />
-                <span>图像处理工具</span>
-              </router-link>
-              <div class="text text-muted">文章</div>
-            </div>
-          </a-col>
-          <a-col :span="6">
-            <div>
-              <router-link to="special/4" class="item blue-item">
-                <img src="~assets/images/icon-3.png" alt="" />
-                <span>产品经理工具</span>
-              </router-link>
-              <div class="text text-muted">专题</div>
-            </div>
-          </a-col>
-          <a-col :span="6">
-            <div>
-              <router-link to="special" class="item purple-item">
-                <img src="~assets/images/icon-4.png" alt="" />
-                <span>更多专题</span>
-              </router-link>
-              <div class="text text-muted">精选</div>
+              <div v-if="device == 'mobile'" class="text text-muted">{{ nav.mname }}</div>
             </div>
           </a-col>
         </a-row>
@@ -109,7 +82,7 @@
             >
           </nav>
           <div class="fr">
-            <a href="/sofe/all" class="more">
+            <a href="/sofe" class="more">
               更多软件
               <i class="iconfont">&#xe600;</i>
             </a>
@@ -142,12 +115,12 @@
               >{{ tab.title }}</a
             >
           </nav>
-          <div class="fr">
+          <!-- <div class="fr">
             <a href="/sofe/all" class="more">
-              更多软件
+              更多文章
               <i class="iconfont">&#xe600;</i>
             </a>
-          </div>
+          </div> -->
         </div>
         <div class="bd">
           <tutorial-list :data="tutorialList"></tutorial-list>
@@ -164,6 +137,7 @@ import sofeList from "@/components/sofeList";
 import tutorialList from "@/components/tutorialList";
 import { requestBanner } from "@/api/banner";
 import { requestRecommendSoftList, requestRecommendArticle } from "@/api/soft";
+import { mapGetters } from "vuex";
 
 export default {
   name: "index",
@@ -189,8 +163,45 @@ export default {
         { title: "新鲜发布", value: "new" },
         { title: "站长推荐", value: "recommend" }
       ],
-      tutorialList: []
+      tutorialList: [],
+      navTabs: [
+        {
+          name: "新人必备",
+          icon: require( "@/assets/images/icon-1.png"),
+          class: "green-item",
+          url: "special/8",
+          mname: "软件",
+          murl: ""
+        },
+        {
+          name: "图形处理工具",
+          icon: require( "@/assets/images/icon-2.png"),
+          class: "orange-item",
+          url: "special/3",
+          mname: "文章",
+          murl: ""
+        },
+        {
+          name: "产品经理工具",
+          icon: require( "@/assets/images/icon-3.png"),
+          class: "blue-item",
+          url: "special/4",
+          mname: "专题",
+          murl: ""
+        },
+        {
+          name: "更多专题",
+          icon: require( "@/assets/images/icon-4.png"),
+          class: "purple-item",
+          url: "special",
+          mname: "精选",
+          murl: ""
+        }
+      ]
     };
+  },
+  computed: {
+    ...mapGetters(["device"])
   },
   async asyncData(app) {
     const [bannerData, softData, artilceData] = await Promise.all([

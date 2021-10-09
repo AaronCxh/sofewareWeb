@@ -21,17 +21,18 @@ export function requestFeedBackList(params) {
 /**
  * 提交留言
  * @param {{
- *  nickname： String
- *  email: String
- *  content: String
+ *  nickname:string
+ *  email:string
+ *  content:string
  * }} params
  * @returns
  */
 export function postFeedBack(params) {
   return request({
     url: "/include/getdata",
+    method: "post",
     data: {
-      apiname: "getnecessarysoft",
+      apiname: "savefeedback",
       ...params
     }
   });

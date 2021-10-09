@@ -1,5 +1,5 @@
 ﻿<template>
-  <a href="#" class="sofe-wrapper__item border">
+  <router-link :to="`/sofe/${data.AutoID}`" class="sofe-wrapper__item border">
     <div class="sofe-wrapper__image">
       <div
         class="shadow"
@@ -18,14 +18,19 @@
       <div class="sofe-wrapper__item--version">
         {{ data.Version }}
       </div>
-      <div class="sofe-wrapper__item--name">{{ data.Title }}</div>
-      <div class="sofe-wrapper__item--summary">{{ data.SubTitle }}</div>
+      <div class="sofe-wrapper__item--name">
+        {{ data.Title }}
+        <slot name="title" :data="data" />
+      </div>
+      <div class="sofe-wrapper__item--summary">
+        {{ data.SubTitle }}<slot name="summary" :data="data" />
+      </div>
       <div class="sofe-wrapper__item--more" v-if="showMore">
         <i class="iconfont">&#xe604;</i>
       </div>
     </div>
-    <slot name="extend" />
-  </a>
+    <slot name="extend" :data="data" />
+  </router-link>
 </template>
 
 <script>
