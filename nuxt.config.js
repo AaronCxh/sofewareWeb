@@ -61,8 +61,6 @@ export default {
   // 配置自定义路由
   router: {
     mode: "hash",
-    extendRoutes(routes, resolve) {
-      console.log(routes);
-    }
+    extendRoutes(routes, resolve) {}
   }
 };
