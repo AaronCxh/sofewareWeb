@@ -51,10 +51,10 @@
                     <img :src="item.Img" alt="" />
                   </div>
                 </div>
-                <div class="btn button-prev">
+                <div class="swiper-btn button-prev">
                   <i class="iconfont">&#xe6d4;</i>
                 </div>
-                <div class="btn button-next">
+                <div class="swiper-btn button-next">
                   <i class="iconfont">&#xe600;</i>
                 </div>
               </div>
@@ -388,7 +388,7 @@ export default {
         this.$message.info({
           content: h => {
             return h("div", { class: "test-class" }, [
-              `天翼云盘提取码「${code}」复制成功，到下载页面的密码/提取码输入框粘贴即可。`,
+              `提取码「${code}」复制成功，到下载页面的密码/提取码输入框粘贴即可。`,
               h(
                 "a",
                 {

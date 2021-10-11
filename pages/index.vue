@@ -39,10 +39,10 @@
             </div>
           </div>
           <div class="swiper-pagination"></div>
-          <div class="btn button-prev">
+          <div class="swiper-btn button-prev">
             <i class="iconfont">&#xe6d4;</i>
           </div>
-          <div class="btn button-next">
+          <div class="swiper-btn button-next">
             <i class="iconfont">&#xe600;</i>
           </div>
         </div>

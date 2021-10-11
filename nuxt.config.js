@@ -53,6 +53,17 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: [/vant.*?less/],
+    babel: {
+      plugins: [
+        ['import', {
+          libraryName: 'vant',
+          "style": (name) => {
+            return `${name}/style/less.js`
+          }
+        }, 'vant']
+      ],
+    },
     // extend(config, { isClient }) {
     //   config.externals = {
     //   }

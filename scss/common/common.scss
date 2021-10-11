@@ -1,12 +1,31 @@
-﻿@import '@/scss/var/var.scss';
-@import '@/scss/mixins/mixins.scss';
+﻿@import "@/scss/var/var.scss";
+@import "@/scss/mixins/mixins.scss";
 
+:root {
+  --sofeItembackgroundColor: #1b273a;
+  --sofeItemColor: #a0b4c8;
+  --borderColor: #243043;
+  --tutorialBackgroundColor: #121a26;
+  --color-default: #50a1ff;
+  --color-success: #0081cc;
+  --color-danger: #e93b3d;
+  --color-warn: #fa811b;
+  --color-fontColor: #a0b4c8;
+  --darkBackgroundColor: #16202f;
+  --borderColor: rgba(120, 130, 140, 0.09);
+  --color-textColor: rgba(160, 180, 200, 0.9);
+}
 button:after {
   border-color: transparent;
 }
-
+.flex-item {
+  flex: 1;
+}
+.mb-7 {
+  margin-bottom: 48px;
+}
 .nowrap {
-  @include nowrap()
+  @include nowrap();
 }
 .fixed-bottom {
   position: fixed;
@@ -42,19 +61,19 @@ button:after {
 }
 
 .button-default {
-  background: $color-default ;
-  color: #fff ;
-  border-color: $color-default ;
+  background: $color-default;
+  color: #fff;
+  border-color: $color-default;
   &:hover {
-    background: darken($color: $color-default, $amount: 10) ;
-    color: #fff ;
-    border-color: darken($color: $color-default, $amount: 10) ;
+    background: darken($color: $color-default, $amount: 10);
+    color: #fff;
+    border-color: darken($color: $color-default, $amount: 10);
   }
 }
 .button-default-reverse {
-  background: transparent ;
-  color: $color-default ;
-  border-color: $color-default ;
+  background: transparent;
+  color: $color-default;
+  border-color: $color-default;
   &:hover {
     background: $color-default;
     color: #fff;
@@ -113,4 +132,37 @@ button:after {
 
 .mb32 {
   margin-bottom: 32px;
+}
+
+.mb24 {
+  margin-bottom: 24px;
+}
+
+.pd0 {
+  padding: 0 !important;
+}
+
+.mh500 {
+  min-height: 500px;
+}
+
+.scrollabled {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #263852;
+}
+
+::-webkit-scrollbar-track {
+  background: #16202f;
+}
+
+.mb16 {
+  margin-bottom: 16px;
 }
