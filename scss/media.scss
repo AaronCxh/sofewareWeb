@@ -31,6 +31,86 @@
       width: 100%;
     }
   }
+  .app-layout {
+    > .container {
+      padding: 0;
+    }
+    .app-content__list--body {
+      .sofe-wrapper__item {
+        padding: 15px 32px !important;
+      }
+      .sofe-wrapper__item--con {
+        width: 1% !important;
+      }
+      .arrow {
+        margin-left: 8px;
+      }
+      .size {
+        display: none !important;
+      }
+    }
+    .main-title {
+      padding: 0 32px;
+    }
+    .my-mpagination {
+      margin-top: 20px;
+    }
+  }
+  .device-mobile {
+    .sofeDetail-wrapper {
+      text-align: center;
+      .icon {
+        width: 96px;
+        height: 96px;
+      }
+      h3 {
+        font-size: 24px;
+      }
+      h5 {
+        font-size: 20px;
+      }
+      .info-list {
+        margin: 16px 0 24px;
+        span {
+          margin-right: 12px;
+          .iconfont {
+            font-weight: 400;
+            margin-right: 4px;
+            opacity: 0.7;
+          }
+        }
+      }
+      .title {
+        font-size: 24.5px;
+        font-weight: 700;
+        margin-top: 24px;
+      }
+      .soft-blockquote {
+        width: 100%;
+        padding: 24px;
+      }
+      .swiper-pagination {
+        position: relative;
+        margin: 24px 0 0;
+      }
+      .button {
+        width: 200px;
+        height: 44px;
+        font-size: 15px;
+        border-radius: 44px;
+        margin-bottom: 48px;
+      }
+    }
+    .topbar {
+      display: none;
+    }
+    .navbar {
+      display: none;
+    }
+    .main-wrapper {
+      display: none;
+    }
+  }
 }
 @media (min-width: 768px) and (max-width: 992px) {
   .container {
@@ -51,9 +131,18 @@
   }
   .app-layout {
     @include b(app-content) {
-      @include e(header) {
-      }
-      @include e(body) {
+      @include e(list) {
+        @include m(header) {
+        }
+        @include m(body) {
+          .ant-row-flex {
+            &.grid-row {
+              .f-col {
+                width: (100% / 3);
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -84,6 +173,13 @@
         @include m(header) {
         }
         @include m(body) {
+          .ant-row-flex {
+            &.grid-row {
+              .f-col {
+                width: (100% / 3);
+              }
+            }
+          }
         }
       }
       @include e(info) {
@@ -118,6 +214,13 @@
         @include m(header) {
         }
         @include m(body) {
+          .ant-row-flex {
+            &.grid-row {
+              .f-col {
+                width: (100% / 4);
+              }
+            }
+          }
         }
       }
       @include e(info) {

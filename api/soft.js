@@ -1,11 +1,11 @@
-﻿import request from '@/utils/request'
+﻿import request from "@/utils/request";
 
 /**
  * 首页精品软件
  * @param {{
  *  filter: 'new'|'hot'|'recommend'
- * }} params 
- * @returns 
+ * }} params
+ * @returns
  */
 export function requestRecommendSoftList(params) {
   return request({
@@ -21,8 +21,8 @@ export function requestRecommendSoftList(params) {
  * 首页获取教程文章
  * @param {{
  *  filter: 'new'|'recommend'
- * }} params 
- * @returns 
+ * }} params
+ * @returns
  */
 export function requestRecommendArticle(params) {
   return request({
@@ -36,8 +36,8 @@ export function requestRecommendArticle(params) {
 
 /**
  * 获取软件详情
- * @param {Number} id 
- * @returns 
+ * @param {Number} id
+ * @returns
  */
 export function requestSoftDetailByID(id) {
   return request({
@@ -55,7 +55,7 @@ export function requestSoftDetailByID(id) {
 export function postLikeIt(id) {
   return request({
     url: "/include/getdata",
-    method: 'post',
+    method: "post",
     data: {
       apiname: "ding",
       id
@@ -63,11 +63,10 @@ export function postLikeIt(id) {
   });
 }
 
-
 /**
  * 获取相关软件
- * @param {Number} id 
- * @returns 
+ * @param {Number} id
+ * @returns
  */
 export function requestRelevancySoftList(id) {
   return request({
@@ -76,13 +75,12 @@ export function requestRelevancySoftList(id) {
       apiname: "getrelatedsoft",
       id
     }
-  })
+  });
 }
-
 
 /**
  * 获取装机必备
- * @returns 
+ * @returns
  */
 export function requestBibeiSoftList() {
   return request({
@@ -93,11 +91,10 @@ export function requestBibeiSoftList() {
   });
 }
 
-
 /**
  * 获取软件栏目
  * @param {String} key
- * @returns 
+ * @returns
  */
 export function requestSofeNodeList(key) {
   return request({
@@ -106,7 +103,7 @@ export function requestSofeNodeList(key) {
       apiname: "getsoftnode",
       identifier: key
     }
-  })
+  });
 }
 
 /**
@@ -131,8 +128,8 @@ export function requestSofeAttr() {
  * languageid: Number
  * key: String
  * filter: '最新'|'下载'|'推荐'
- * }} params 
- * @returns 
+ * }} params
+ * @returns
  */
 export function requestSofeList(params) {
   return request({
@@ -140,6 +137,33 @@ export function requestSofeList(params) {
     params: {
       apiname: "getsoft",
       ...params
+    }
+  });
+}
+
+/**
+ * 获取相关推荐
+ * @param {*} params
+ */
+export function requestRelatedSoftList(params) {
+  return request({
+    url: "/include/getdata",
+    params: {
+      apiname: "getrelatedrecommend"
+    }
+  });
+}
+
+/**
+ * 获取本周热门
+ * @param {*} params 
+ * @returns 
+ */
+export function requestWeekHot(params) {
+  return request({
+    url: "/include/getdata",
+    params: {
+      apiname: "getweekhot"
     }
   });
 }

@@ -1,6 +1,4 @@
 ﻿<template>
-    <!-- style="overflow:auto"
-    v-infinite-scroll="onReachBottom" -->
   <div
     :class="`app-wrapper device-${device}`"
   >
@@ -9,7 +7,13 @@
     <div class="main-wrapper">
       <nuxt></nuxt>
     </div>
-    <page-footer></page-footer>
+    <page-footer v-if="device != 'mobile'"></page-footer>
+    <div class="small-tip" v-if="device == 'mobile'">
+      <div class="flex-box">
+        <h1 class="title">哇，窗口太小啦</h1>
+        <p class="summary">请调整浏览器窗口大小或者请使用手机查看！</p>
+      </div>
+    </div>
   </div>
 </template>
 

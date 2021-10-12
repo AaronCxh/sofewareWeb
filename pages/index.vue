@@ -38,11 +38,11 @@
               </div>
             </div>
           </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-btn button-prev">
+          <div v-if="device != 'mobile'" class="swiper-pagination"></div>
+          <div v-if="device != 'mobile'" class="swiper-btn button-prev">
             <i class="iconfont">&#xe6d4;</i>
           </div>
-          <div class="swiper-btn button-next">
+          <div v-if="device != 'mobile'" class="swiper-btn button-next">
             <i class="iconfont">&#xe600;</i>
           </div>
         </div>

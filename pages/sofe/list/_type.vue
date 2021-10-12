@@ -4,11 +4,12 @@
     :class="{ 'w-full': currentGrid == 3 }"
   >
     <div class="container">
-      <div class="flex-box">
+      <div class="flex-box" v-if="device != 'mobile'">
         <div class="app-sidebar">
           <div class="scrollabled">
-            <p class="title">分类</p>
+            <p class="title" v-if="!searchKey">分类</p>
             <a-menu
+              v-if="!searchKey"
               class="mb16"
               mode="inline"
               :open-keys="openKeys"
@@ -39,7 +40,14 @@
             </a-menu>
             <div class="mb24" v-for="(filter, index) in filterList">
               <p class="title">{{ filter.Name }}</p>
-              <a-radio-group v-model="index == 0 ? lang : sys" class="my-radio-group">
+              <a-radio-group
+                :value="index == 0 ? sys : lang"
+                class="my-radio-group"
+                @change="onRadioChange(index == 0 ? 'sys' : 'lang', $event)"
+              >
+                <a-radio :value="0">
+                  全部
+                </a-radio>
                 <a-radio
                   :value="item.AutoID"
                   v-for="item in filter.PropertyItemList"
@@ -49,18 +57,6 @@
                 </a-radio>
               </a-radio-group>
             </div>
-            <!-- <div class="mb24">
-              <p class="title">语言</p>
-              <a-radio-group v-model="lang">
-                <a-radio
-                  :value="item.AutoID"
-                  v-for="item in filterList[1].PropertyItemList"
-                  :key="item.Name"
-                >
-                  {{ item.Name }}
-                </a-radio>
-              </a-radio-group>
-            </div> -->
           </div>
         </div>
         <div class="app-content">
@@ -68,7 +64,7 @@
             <div class="app-content__list--header">
               <div class="main-title">
                 <h5>
-                  系统清理 <span>({{ total }})</span>
+                  {{ title }} <span>({{ total }})</span>
                 </h5>
               </div>
               <div class="menu">
@@ -104,6 +100,19 @@
                 ></a>
               </div>
             </div>
+            <div class="search-bar" v-if="searchKey.length">
+              共为您找到 <span class="text">{{ total }}</span>
+              款和
+              <a-tag
+                v-for="(tag, index) in tags"
+                :key="tag"
+                closable
+                @close="() => handleClose(tag)"
+              >
+                {{ tag }}
+              </a-tag>
+              相关的软件
+            </div>
             <div class="app-content__list--body">
               <a-spin :spinning="spinning">
                 <a-row
@@ -115,7 +124,7 @@
                 >
                   <a-col
                     v-for="(item, index) in sofeList"
-                    :key="item.AutoID"
+                    :key="`a${item.AutoID}`"
                     :class="
                       `f-col animation fadeInLeft delay-${index} ${
                         index == currentActiveIndex ? 'active' : ''
@@ -154,8 +163,10 @@
                     </soft-item>
                   </a-col>
                 </a-row>
+                <div class="empty" v-if="!sofeList.length">暂无数据</div>
               </a-spin>
               <a-pagination
+                v-if="sofeList.length"
                 :total="total"
                 :item-render="itemRender"
                 @change="onChange"
@@ -172,129 +183,60 @@
                 <h6>相关推荐</h6>
               </div>
               <div class="siderbar-apps__body">
-                <a href="#" class="item">
+                <router-link
+                  target="_blank"
+                  :to="`/${item.Type}/${item.AutoID}`"
+                  class="item"
+                  v-for="item in relatedSoftList"
+                  :key="`b${item.AutoID}`"
+                >
                   <div class="cover">
                     <img
                       class="lazyload blur_img"
                       src="~assets/images/ball-loading.svg"
-                      data-src="https://cdn.macwk.com/public/uploads/_/originals/tencent-lemon-1.png"
+                      :data-src="item.Icon"
                       alt=""
                     />
                   </div>
                   <div class="flex-1">
                     <p>
-                      腾讯柠檬 - 打造最强免费系统优化清理应用
+                      {{ item.Title }}
                     </p>
                   </div>
-                </a>
-                <a href="#" class="item">
-                  <div class="cover">
-                    <img
-                      class="lazyload blur_img"
-                      src="~assets/images/ball-loading.svg"
-                      data-src="https://cdn.macwk.com/public/uploads/_/originals/tencent-lemon-1.png"
-                      alt=""
-                    />
-                  </div>
-                  <div class="flex-1">
-                    <p>
-                      腾讯柠檬 - 打造最强免费系统优化清理应用
-                    </p>
-                  </div>
-                </a>
-                <a href="#" class="item">
-                  <div class="cover">
-                    <img
-                      class="lazyload blur_img"
-                      src="~assets/images/ball-loading.svg"
-                      data-src="https://cdn.macwk.com/public/uploads/_/originals/tencent-lemon-1.png"
-                      alt=""
-                    />
-                  </div>
-                  <div class="flex-1">
-                    <p>
-                      腾讯柠檬 - 打造最强免费系统优化清理应用
-                    </p>
-                  </div>
-                </a>
-                <a href="#" class="item">
-                  <div class="cover">
-                    <img
-                      class="lazyload blur_img"
-                      src="~assets/images/ball-loading.svg"
-                      data-src="https://cdn.macwk.com/public/uploads/_/originals/tencent-lemon-1.png"
-                      alt=""
-                    />
-                  </div>
-                  <div class="flex-1">
-                    <p>
-                      腾讯柠檬 - 打造最强免费系统优化清理应用
-                    </p>
-                  </div>
-                </a>
-                <a href="#" class="item">
-                  <div class="cover">
-                    <img
-                      class="lazyload blur_img"
-                      src="~assets/images/ball-loading.svg"
-                      data-src="https://cdn.macwk.com/public/uploads/_/originals/tencent-lemon-1.png"
-                      alt=""
-                    />
-                  </div>
-                  <div class="flex-1">
-                    <p>
-                      腾讯柠檬 - 打造最强免费系统优化清理应用
-                    </p>
-                  </div>
-                </a>
+                </router-link>
               </div>
             </div>
 
             <div class="siderbar-apps border flex-box" v-if="currentGrid == 2">
-              <div class="siderbar-apps__header pd0">
-                <van-tabs v-model="tabsActive" class="my-tabs">
-                  <van-tab title="本周热门">
-                    <div class="siderbar-apps__body mh500">
-                      <a
-                        href="#"
-                        class="hot-item"
-                        v-for="(item, index) in hotList"
-                        :key="index"
-                      >
-                        <div class="number">{{ index + 1 }}</div>
-                        <div class="con">
-                          <div class="name">
-                            Downie
-                          </div>
-                          <div class="summary">
-                            最好的视频下载器
-                          </div>
-                        </div>
-                        <div class="cover">
-                          <img
-                            class="lazyload blur_img"
-                            data-src="https://cdn.macwk.com/public/uploads/_/originals/downie-4-bs.png"
-                            src="/assets/images/ball-loading.svg"
-                            alt=""
-                          />
-                        </div>
-                      </a>
+              <div class="siderbar-apps__header">
+                <h6>本周热门</h6>
+              </div>
+              <div class="siderbar-apps__body mh500">
+                <router-link
+                  :to="`/sofe/${item.AutoID}`"
+                  target="_blank"
+                  class="hot-item"
+                  v-for="(item, index) in hotList"
+                  :key="`h${item.AutoID}`"
+                >
+                  <div class="number">{{ index + 1 }}</div>
+                  <div class="con">
+                    <div class="name">
+                      {{ item.Title }}
                     </div>
-                  </van-tab>
-                  <van-tab title="相关评论">
-                    <div class="siderbar-apps__body mh500">
-                      <a href="#" class="aboutComments-item">
-                        <div class="top">
-                          <div class="name">高远球</div>
-                          <div class="text-muted f12">2021-10-09</div>
-                        </div>
-                        <div class="bottom">
-                          <p>只有5.0和之前的版本是汉化的，6.X都是英文了</p>
-                        </div>
-                      </a>
+                    <div class="summary">
+                      {{ item.SubTitle }}
                     </div>
-                  </van-tab>
-                </van-tabs>
+                  </div>
+                  <div class="cover">
+                    <img
+                      class="lazyload blur_img"
+                      :data-src="item.Icon"
+                      src="~assets/images/ball-loading.svg"
+                      alt=""
+                    />
+                  </div>
+                </router-link>
               </div>
             </div>
             <template v-if="currentGrid == 3">
@@ -387,6 +329,50 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        <div class="app-content__list--header">
+          <div class="main-title">
+            <h5>
+              {{ title }} <span>({{ total }})</span>
+            </h5>
+          </div>
+        </div>
+        <div class="app-content__list--body">
+          <a-spin :spinning="spinning">
+            <a-row type="flex" class="col-row">
+              <a-col
+                v-for="(item, index) in sofeList"
+                :key="`a${item.AutoID}`"
+                :class="
+                  `f-col animation fadeInLeft delay-${index} ${
+                    index == currentActiveIndex ? 'active' : ''
+                  }`
+                "
+              >
+                <soft-item
+                  @click="onSelected"
+                  :data="item"
+                  :show-more="false"
+                  :is-like="currentGrid != 3"
+                >
+                  <template #title="scope">
+                    <span class="version"
+                      ><i>-</i> {{ scope.data.Version }}</span
+                    >
+                  </template>
+                  <template #extend="scope">
+                    <div class="arrow">
+                      <i class="iconfont">&#xe604;</i>
+                    </div>
+                  </template>
+                </soft-item>
+              </a-col>
+            </a-row>
+            <div class="empty" v-if="!sofeList.length">暂无数据</div>
+          </a-spin>
+          <van-pagination class="my-mpagination" @change="onChange" v-model="currentPage" :items-per-page="20" :total-items="total" mode="simple" />
+        </div>
+      </div>
     </div>
     <a-modal
       title="下载地址"
@@ -428,9 +414,12 @@ import {
   requestSofeNodeList,
   requestSofeAttr,
   requestSoftDetailByID,
-  requestSofeList
+  requestSofeList,
+  requestRelatedSoftList,
+  requestWeekHot
 } from "@/api/soft";
-import { Tab, Tabs } from "vant";
+import { Pagination  } from "vant";
+import { mapGetters } from "vuex";
 window._swiper = null;
 function copy(txt) {
   return new Promise(resolve => {
@@ -452,11 +441,12 @@ export default {
   layout: "layout",
   components: {
     softItem,
-    [Tab.name]: Tab,
-    [Tabs.name]: Tabs
+    [Pagination.name]: Pagination,
   },
   data() {
     return {
+      currentPage: 1,
+      tags: [],
       show: false,
       openKeys: ["all"],
       selectedKeys: [],
@@ -483,7 +473,7 @@ export default {
       nodeList: [],
       spinning: false,
       tabsActive: 0,
-      hotList: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+      hotList: [],
       aboutCommentList: [],
       currentActiveIndex: 0,
       sofeDetail: {},
@@ -491,7 +481,9 @@ export default {
       total: 0,
       filterList: [],
       lang: 0,
-      sys: 0
+      sys: 0,
+      searchKey: "",
+      relatedSoftList: []
     };
   },
   async asyncData(app) {
@@ -519,6 +511,15 @@ export default {
     };
   },
   watch: {
+    $route: {
+      handler: function(value) {
+        console.log(value);
+        this.searchKey = value.query.search || "";
+        this.tags = [value.query.search];
+        this.getSofeList();
+      },
+      immediate: true
+    },
     active: function() {
       this.getSofeList();
     },
@@ -528,9 +529,9 @@ export default {
         if (!appWrapperEl) {
           return;
         }
-        if (value == 3) {
-          // this.initSwiper()
-          this.getSofeDetail();
+        if (value == 2) {
+          this.initAsideData();
+        } else if (value == 3) {
           appWrapperEl.classList.add("full-layout");
         } else {
           this.currentActiveIndex = 0;
@@ -540,7 +541,24 @@ export default {
     }
   },
   computed: {
-    currentTitle: function() {}
+    title: function() {
+      let result = "全部软件";
+      for (let i = 0; i < this.nodeList.length; i++) {
+        const element = this.nodeList[i];
+        if (element.Identifier == this.openKeys[0]) {
+          result = element.NodeName;
+          if (this.selectedKeys.length) {
+            for (let j = 0; j < element.nodeList.length; j++) {
+              if (element.nodeList[j].Identifier == this.selectedKeys[0]) {
+                result = element.nodeList[j].NodeName;
+              }
+            }
+          }
+        }
+      }
+      return result;
+    },
+    ...mapGetters(["device"])
   },
   mounted() {
     this.getSofeList();
@@ -550,6 +568,14 @@ export default {
     });
   },
   methods: {
+    async initAsideData() {
+      const [rRes, hRes] = await Promise.all([
+        requestRelatedSoftList(),
+        requestWeekHot()
+      ]);
+      this.relatedSoftList = rRes.dataList;
+      this.hotList = hRes.dataList;
+    },
     itemRender(current, type, originalElement) {
       if (type === "prev") {
         return (
@@ -589,12 +615,12 @@ export default {
       if (active == this.currentGrid) {
         return;
       }
-      this.currentGrid = active;
-      if (active == 3) {
-        this.currentActiveIndex = 0;
-        this.sofeDetail = {};
-        this.getSofeDetail();
+      if (active != 3 && window._swiper != null) {
+        window._swiper.destroy();
+        window._swiper = null;
       }
+      this.currentGrid = active;
+      this.getSofeList();
     },
     onItemClick({ item, key, keyPath }) {
       if (key == this.selectedKeys[0]) {
@@ -612,20 +638,29 @@ export default {
       return requestSofeList({
         pageIndex: pageNum,
         pageSize: 20,
-        identifier: this.selectedKeys.length
+        identifier: this.searchKey
+          ? "all"
+          : this.selectedKeys.length
           ? this.selectedKeys[0]
           : this.openKeys[0],
         filter: this.active,
-        systemid: "",
-        languageid: ""
+        systemid: this.sys,
+        languageid: this.lang,
+        key: this.searchKey
       }).then(res => {
         this.sofeList = res.dataList;
         this.total = res.TotalCount;
         this.spinning = false;
+        this.currentActiveIndex = 0;
+        if (this.currentGrid == 3) {
+          this.getSofeDetail();
+        }
         return res;
       });
     },
     onChange(pageNum) {
+      console.log(pageNum)
+      this.currentPage = pageNum
       this.getSofeList(pageNum);
     },
     onSelected(val) {
@@ -646,6 +681,7 @@ export default {
           setTimeout(() => {
             window._swiper.removeAllSlides();
             this.sofeDetail.PhotoList.forEach(item => {
+              console.log("PhotoList", item);
               window._swiper.appendSlide(`<div
                                 class="swiper-slide"
                               >
@@ -690,9 +726,27 @@ export default {
     },
     onWinOpen(url) {
       window.open(url);
+    },
+    onRadioChange(key, e) {
+      console.log(key, e);
+      this[key] = e.target.value;
+      this.getSofeList();
+    },
+    handleClose(val) {
+      console.log(val);
+      this.tags = [];
+      this.$router.push({
+        path: "/sofe/list/all"
+      });
     }
   }
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.empty {
+  padding: 32px 0;
+  text-align: center;
+  opacity: 0.5;
+}
+</style>
