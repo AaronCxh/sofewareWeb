@@ -43,3 +43,16 @@ export function requestSystem() {
     }
   });
 }
+
+/**
+ * 获取年份属性
+ * @param {*} params 
+ */
+export function requestYearFilter(params) {
+  return request({
+    url: "/include/getdata",
+    params: {
+      apiname: "getyear"
+    }
+  });
+}

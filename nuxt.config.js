@@ -7,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "sofewareWeb",
+    title: "BaoYUN - 精品mac软件下载",
     htmlAttrs: {
       lang: "zh"
     },
@@ -84,12 +84,12 @@ export default {
       ]
     },
     extend(config, { isClient, loaders }) {
-      // config.output.publicPath = "/Templates/html/_nuxt";
+      config.output.publicPath = "/Templates/html/_nuxt/";
       // "D:\\chenxiaohong\\软件站\\sofewareWeb\\.nuxt\\dist\\client";
       // config.output.path = path.resolve(__dirname, "../dist");
       // config.output.filename = 'js/[name].js'
       // config.output.chunkFilename = 'js/[name].js'
-      console.log(config.output.path);
+      console.log('===========',config.output.path);
     }
   },
   // 配置自定义路由

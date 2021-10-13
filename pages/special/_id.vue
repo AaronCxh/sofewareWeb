@@ -13,10 +13,10 @@
               >
                 <template slot="content">
                   <div>
-                    <span  @click="onTab" :data-index="index" class="nav-link" :class="{active: active == index}" v-for="(item, index) in system" :key="item.Name">{{ item.Name }}</span>
+                    <span  @click="onTab" :data-index="index" class="nav-link" :class="{active: active == index}" v-for="(item, index) in years" :key="item.Name">{{ item.Name }}</span>
                   </div>
                 </template>
-                <span>{{ system[active].Name }} <i class="iconfont">&#xe72a;</i></span>
+                <span>{{ years[active].Name }} <i class="iconfont">&#xe72a;</i></span>
               </a-popover>
             </h1>
             <h5 class="text-muted">
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { requestSpecialListByID, requestSystem } from "@/api/special";
+import { requestSpecialListByID, requestYearFilter } from "@/api/special";
 export default {
   name: "specialList",
   layout: "layout",
@@ -98,23 +98,24 @@ export default {
     return {
       list: [{}],
       system: [],
+      years: [],
       active: 0
     };
   },
   async asyncData({ params }) {
-    const [systemRes, specialRes] = await Promise.all([
-      requestSystem(),
+    const [specialRes, yearRes] = await Promise.all([
       requestSpecialListByID({
         pageIndex: 1,
         pageSize: 9999,
         identifier: params.id,
-        systemid: 1
-      })
+        yearid: 5
+      }),
+      requestYearFilter()
     ]);
-    console.log(systemRes, specialRes)
+    console.log(specialRes, yearRes)
     return {
-      system: systemRes.dataList,
-      list: specialRes.dataList
+      list: specialRes.dataList,
+      years: yearRes.dataList
     };
   },
   mounted() {
@@ -131,7 +132,7 @@ export default {
         pageIndex: 1,
         pageSize: 9999,
         identifier: this.$route.params.id,
-        systemid: this.system[this.active].AutoID
+        yearid: this.years[this.active].AutoID
       }).then((res) => {
         this.list = res.dataList
       })

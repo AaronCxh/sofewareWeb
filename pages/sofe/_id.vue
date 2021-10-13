@@ -23,8 +23,8 @@
                   <img :src="data.Icon" class="lazyload" />
                   <div class="con">
                     <div class="name">
-                      {{ data.Title }}
-                      <!-- <span class="text-muted">(TNT + 免激活)</span> -->
+                      {{ data.Title }} {{ data.Year }} {{ data.SubTitle }}
+                      <!-- <span class="text-muted">{{ data.Year }} <template v-if="data.SubTitle">+ {{ data.SubTitle }}</template></span> -->
                     </div>
                     <div class="action-group">
                       <button
@@ -561,7 +561,7 @@ export default {
         span {
           font-size: 18px;
           margin-left: 8px;
-          vertical-align: 4px;
+          // vertical-align: 4px;
         }
       }
       img {
