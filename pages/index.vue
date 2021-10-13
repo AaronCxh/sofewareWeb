@@ -4,39 +4,18 @@
       <div class="container">
         <div class="swiper-container" id="promo-swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="flex-box align-center">
+            <div class="swiper-slide" v-for="item in banner">
+              <a target="_blank" :href="item.Link" class="flex-box align-center">
                 <div class="swiper-box">
-                  <h1>无广告，无后门，安全！</h1>
+                  <h1>{{ item.Title }}</h1>
                   <p>
-                    每款Mac应用都经过Macwk.com严格测试后发布，确保应用可以和正版软件一样稳定运行使用！
+                    {{ item.Desc }}
                   </p>
                 </div>
-                <img class="img" src="~assets/images/banner1.png" alt="" />
-              </div>
+                <img class="img" :src="item.ContentImage" alt="" />
+              </a>
             </div>
-            <div class="swiper-slide">
-              <div class="flex-box align-center">
-                <div class="swiper-box">
-                  <h1>无广告，无后门，安全！</h1>
-                  <p>
-                    网站无广告，软件无后门，欢迎监督。隐私方面本站无能为力，推荐大家安装防火墙软件禁止应用联网！
-                  </p>
-                </div>
-                <img class="img" src="~assets/images/banner1.png" alt="" />
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="flex-box align-center">
-                <div class="swiper-box">
-                  <h1>无广告，无后门，安全！</h1>
-                  <p>
-                    网站无广告，软件无后门，欢迎监督。隐私方面本站无能为力，推荐大家安装防火墙软件禁止应用联网！
-                  </p>
-                </div>
-                <img class="img" src="~assets/images/banner1.png" alt="" />
-              </div>
-            </div>
+        
           </div>
           <div v-if="device != 'mobile'" class="swiper-pagination"></div>
           <div v-if="device != 'mobile'" class="swiper-btn button-prev">
@@ -246,7 +225,11 @@ export default {
         spaceBetween: 0,
         centeredSlidesBounds: true,
         loop: true,
-        breakpoints: {}
+        breakpoints: {
+          768: {
+            slidesPerView: 1,
+          }
+        }
       });
     },
     onSofeClick(e) {
