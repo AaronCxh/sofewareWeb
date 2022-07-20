@@ -4,7 +4,7 @@
       <div class="container">
         <div class="swiper-container" id="promo-swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="item in banner">
+            <div class="swiper-slide" v-for="item in banner" :key="item.AutoID">
               <a target="_blank" :href="item.Link" class="flex-box align-center">
                 <div class="swiper-box">
                   <h1>{{ item.Title }}</h1>
