@@ -63,7 +63,7 @@ export default {
   methods: {
     getDetail() {
       requestSiteConfig("about").then(res => {
-        console.log("关于我们", res);
+        console.log("关于我们asd", res);
         this.data = res
       });
     }
